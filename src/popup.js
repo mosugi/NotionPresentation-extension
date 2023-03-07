@@ -1,4 +1,4 @@
-import "simpledotcss/simple.min.css"
+import "simpledotcss/simple.min.css";
 import "./popup.css";
 import content from "./content?script";
 
@@ -16,7 +16,8 @@ const executeScript = async () => {
   } else {
     chrome.scripting.executeScript({
       target: { tabId: tab.id },
-      function: () => alert("Please open *.notion.site or *.notion.so and click again!"),
+      function: () =>
+        alert("Please open *.notion.site or *.notion.so and click again!"),
     });
   }
 };

@@ -1,0 +1,8 @@
+{
+  "Name": {
+    "message": "Notion Presentation"
+  },
+  "Description": {
+    "message": "Add presentation mode to Notion. This will notion page into full screen mode and smooth scroll to next/previous header block."
+  }
+}

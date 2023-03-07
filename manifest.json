@@ -1,7 +1,12 @@
 {
   "manifest_version": 3,
-  "name": "Notion Presentation",
+  "name": "__MSG_Name__",
+  "description": "__MSG_Description__",
   "version": "3.0.0",
+  "default_locale": "en",
   "permissions": ["activeTab", "scripting"],
-  "action": { "default_popup": "src/popup.html" }
+  "action": { "default_popup": "src/popup.html" },
+  "icons": {
+    "128": "icon128.png"
+  }
 }
