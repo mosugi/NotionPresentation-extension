@@ -1,7 +1,7 @@
-import {slides} from "./Slides";
-import {toggleFullScreen} from "./FullScreen";
-import {addAnimation, hiddenControls, hidePageBlocks, showPageBlocks, styleFirstPage} from "./Style";
-import {addOsc, exitSlide, nextSlide, previousSlide} from "./Control";
+import {slides} from "./lib/Slides";
+import {toggleFullScreen} from "./lib/FullScreen";
+import {addAnimation, hiddenControls, hidePageBlocks, showPageBlocks, styleFirstPage} from "./lib/Style";
+import {addOsc, exitSlide, nextSlide, previousSlide} from "./lib/Control";
 
 const initSlide = (slides) => {
   styleFirstPage();
