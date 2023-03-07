@@ -1,0 +1,6 @@
+{
+  "manifest_version": 3,
+  "name": "Notion Presentation",
+  "version": "3.0.0",
+  "action": { "default_popup": "index.html" }
+}
