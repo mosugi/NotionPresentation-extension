@@ -1,5 +1,5 @@
 import "./popup.css";
-import { startPresentation } from "./content";
+import presentation from "./content?script";
 
 document.querySelector("#app").innerHTML = `
   <button id="start">Start Presentation</button>
@@ -10,13 +10,12 @@ const executeScript = async () => {
   if (tab.url.includes("notion.site") || tab.url.includes("notion.so")) {
     chrome.scripting.executeScript({
       target: { tabId: tab.id },
-      function: startPresentation,
+      files: [presentation],
     });
   } else {
     chrome.scripting.executeScript({
       target: { tabId: tab.id },
-      function: startPresentation,
-      // function: () => alert("Please open *.notion.site or *.notion.so and click again!"),
+      function: () => alert("Please open *.notion.site or *.notion.so and click again!"),
     });
   }
 };
