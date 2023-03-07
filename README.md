@@ -1,2 +1,3 @@
 # Notion-Presentation-extension
-Add a presentation mode to your Notion 
+
+Add a presentation mode to your Notion
