@@ -1,5 +1,6 @@
+import "simpledotcss/simple.min.css"
 import "./popup.css";
-import presentation from "./content?script";
+import content from "./content?script";
 
 document.querySelector("#app").innerHTML = `
   <button id="start">Start Presentation</button>
@@ -10,7 +11,7 @@ const executeScript = async () => {
   if (tab.url.includes("notion.site") || tab.url.includes("notion.so")) {
     chrome.scripting.executeScript({
       target: { tabId: tab.id },
-      files: [presentation],
+      files: [content],
     });
   } else {
     chrome.scripting.executeScript({
