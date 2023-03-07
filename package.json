@@ -9,6 +9,10 @@
   },
   "devDependencies": {
     "@crxjs/vite-plugin": "^1.0.14",
+    "prettier": "2.8.4",
     "vite": "^2.9.9"
+  },
+  "dependencies": {
+    "simpledotcss": "^2.1.2"
   }
 }
