@@ -1,12 +1,8 @@
 import { slides } from "./lib/Slides";
-import {
-  addAnimation,
-  hiddenControls,
-  hidePageBlocks,
-  showPageBlocks,
-  styleFirstPage,
-} from "./lib/Style";
-import { addKeyDownListener, addOsc } from "./lib/Control";
+import { addAnimation, hiddenControls, styleFirstPage } from "./lib/Style";
+import { hidePageBlocks, showPageBlocks } from "./lib/Blocks";
+import { addKeyDownListener } from "./lib/KeyControl";
+import { addOsc } from "./lib/OnScreenControl";
 
 const initPresentation = (slides) => {
   styleFirstPage();

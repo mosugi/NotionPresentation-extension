@@ -1,39 +1,40 @@
 export const slides = (() => {
-  let chunkBlocks = [];
+  let slideBlocks = [];
 
   // first page
-  chunkBlocks.push(document.querySelector(".pseudoSelection:first-of-type"));
-  chunkBlocks.push(
+  slideBlocks.push(document.querySelector(".pseudoSelection:first-of-type"));
+  slideBlocks.push(
     document.querySelector(".pseudoSelection:first-of-type + div")
   );
 
-  const notionPageContent = Array.from(
+  const notionPageBlocks = Array.from(
     document.querySelectorAll(".notion-page-content .notion-selectable")
   );
 
-  let pages = [];
+  let internalSlides = [];
 
-  notionPageContent.forEach((it, i, arr) => {
+  notionPageBlocks.forEach((it, i, arr) => {
     if (!it.className.includes("notion-header-block")) {
-      chunkBlocks.push(it);
+      slideBlocks.push(it);
     } else {
-      pages.push(chunkBlocks);
-      chunkBlocks = [];
-      chunkBlocks.push(it);
+      internalSlides.push(slideBlocks);
+      slideBlocks = [];
+      slideBlocks.push(it);
     }
 
     if (i === arr.length - 1) {
-      pages.push(chunkBlocks);
+      internalSlides.push(slideBlocks);
     }
   });
 
   let i = 0;
   return {
-    all: () => pages,
-    first: () => pages[0],
-    last: () => pages[pages.length - 1],
-    current: () => pages[i],
-    next: () => (i < pages.length - 1 ? pages[++i] : pages[i]),
-    previous: () => (i > 0 ? pages[--i] : pages[i]),
+    all: () => internalSlides,
+    first: () => internalSlides[0],
+    last: () => internalSlides[internalSlides.length - 1],
+    current: () => internalSlides[i],
+    next: () =>
+      i < internalSlides.length - 1 ? internalSlides[++i] : internalSlides[i],
+    previous: () => (i > 0 ? internalSlides[--i] : internalSlides[i]),
   };
 })();
