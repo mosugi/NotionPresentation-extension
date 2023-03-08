@@ -1,4 +1,4 @@
-const requestFullScreen = () => {
+export const requestFullScreen = () => {
   if (!document.fullscreenElement) {
     document.body.requestFullscreen().catch((err) => {
       console.warn(
@@ -10,15 +10,5 @@ const requestFullScreen = () => {
 export const exitFullScreen = () => {
   if (document.fullscreenElement) {
     document.exitFullscreen().catch();
-  }
-};
-export const toggleFullScreen = () => {
-  const osc = document.querySelector("#notion-presentation-osc-switchFull");
-  if (document.fullscreenElement) {
-    exitFullScreen();
-    osc.innerText = "□";
-  } else {
-    requestFullScreen();
-    osc.innerText = "◻︎";
   }
 };

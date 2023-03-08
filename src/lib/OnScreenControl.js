@@ -1,18 +1,15 @@
-import { hidePageBlocks, showPageBlocks } from "./Style";
-import { slides } from "./Slides";
-import { exitFullScreen, toggleFullScreen } from "./FullScreen";
+import { exitFullScreen, requestFullScreen } from "./FullScreen";
+import { exitSlide, nextSlide, previousSlide } from "./SlideControl";
 
-export const nextSlide = () => {
-  hidePageBlocks(slides.current());
-  showPageBlocks(slides.next());
-};
-export const previousSlide = () => {
-  hidePageBlocks(slides.current());
-  showPageBlocks(slides.previous());
-};
-export const exitSlide = () => {
-  exitFullScreen();
-  window.location.reload();
+export const toggleFullScreen = () => {
+  const osc = document.querySelector("#notion-presentation-osc-switchFull");
+  if (document.fullscreenElement) {
+    exitFullScreen();
+    osc.innerText = "□";
+  } else {
+    requestFullScreen();
+    osc.innerText = "◻︎";
+  }
 };
 export const addOsc = () => {
   document
@@ -80,24 +77,6 @@ export const addOsc = () => {
           .forEach((it) => (it.style.opacity = 0));
       }, 3000);
       timeoutLastUpdateTime = Date.now();
-    }
-  });
-};
-
-export const addKeyDownListener = () => {
-  document.body.addEventListener("keydown", (event) => {
-    if (event.key === "ArrowRight" || event.key === "s" || event.key === "d") {
-      nextSlide();
-    }
-
-    if (event.key === "ArrowLeft" || event.key === "w" || event.key === "a") {
-      previousSlide();
-    }
-    if (event.key === "f") {
-      toggleFullScreen();
-    }
-    if (event.key === "Escape" || event.key === "e") {
-      exitSlide();
     }
   });
 };

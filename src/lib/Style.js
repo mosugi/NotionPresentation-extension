@@ -6,12 +6,6 @@ const fadeOut =
   "<style>@keyframes fadeOut { from { opacity:1 }to {opacity:0;}}</style>";
 const animation =
   "<style>.notion-selectable {animation-duration: 0.5s;animation-name: transition;}</style>";
-export const showPageBlocks = (blocks) => {
-  blocks.forEach((it) => (it.style.display = "block"));
-};
-export const hidePageBlocks = (blocks) => {
-  blocks.forEach((it) => (it.style.display = "none"));
-};
 export const styleFirstPage = () => {
   document.querySelector(".pseudoSelection > div").style.height = "80vh"; // original 30vh
   document.querySelector(".pseudoSelection > div > div > div").style.height =
