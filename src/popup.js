@@ -20,6 +20,7 @@ const executeScript = async () => {
         alert("Please open *.notion.site or *.notion.so and click again!"),
     });
   }
+  window.close();
 };
 
 document.querySelector("#start").addEventListener("click", executeScript);
