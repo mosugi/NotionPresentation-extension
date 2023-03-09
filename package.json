@@ -6,7 +6,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "fmt": "npx prettier --write ."
+    "fmt": "npx prettier --write .",
+    "zip": "vite build && mkdir -p out && rm -f ./out/app.zip && zip -r ./out/app.zip dist"
   },
   "devDependencies": {
     "@crxjs/vite-plugin": "^1.0.14",
