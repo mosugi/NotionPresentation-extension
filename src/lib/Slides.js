@@ -1,20 +1,21 @@
+import properties from "./Properties";
+import { isNotIncludes } from "./Util";
+
 export const slides = (() => {
   let slideBlocks = [];
 
   // first page
-  slideBlocks.push(document.querySelector(".pseudoSelection:first-of-type"));
-  slideBlocks.push(
-    document.querySelector(".pseudoSelection:first-of-type + div")
-  );
+  slideBlocks.push(document.querySelector(properties.pageCoverSelector));
+  slideBlocks.push(document.querySelector(properties.pageTitleAndPropSelector));
 
   const notionPageBlocks = Array.from(
-    document.querySelectorAll(".notion-page-content .notion-selectable")
+    document.querySelectorAll(properties.blockSelector)
   );
 
   let internalSlides = [];
 
   notionPageBlocks.forEach((it, i, arr) => {
-    if (!it.className.includes("notion-header-block")) {
+    if (isNotIncludes(it.className, properties.separatorsBlocks)) {
       slideBlocks.push(it);
     } else {
       internalSlides.push(slideBlocks);
