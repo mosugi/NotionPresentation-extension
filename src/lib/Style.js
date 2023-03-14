@@ -1,4 +1,5 @@
 import { setStyle } from "./Util";
+import options from "./Options";
 
 const slideIn =
   "<style>@keyframes transition { from { margin-left: 100%; width: 300%;}to {margin-left: 0%;width: 100%;}}</style>";
@@ -9,6 +10,11 @@ const fadeOut =
 const animation =
   "<style>.notion-selectable {animation-duration: 0.5s;animation-name: transition;}</style>";
 export const styleFirstPage = () => {
+  if (!options.useCoverAsFirstSlide) {
+    setStyle(".pseudoSelection > div", "display", "none"); // Cover
+    setStyle(".pseudoSelection:first-of-type + div > div", "display", "none"); // Title
+  }
+
   const coverImage = document.querySelector(
     ".pseudoSelection > div > div > div"
   );

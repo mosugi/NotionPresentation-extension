@@ -1,9 +1,9 @@
 import { toggleFullScreen } from "./OnScreenControl";
 import { exitSlide, nextSlide, previousSlide } from "./SlideControl";
-import Properties from "./Properties";
+import options from "./Options";
 
 export const addKeyDownListener = () => {
-  if (Properties.enableKeyboard) {
+  if (options.enableKeyboard) {
     document.body.addEventListener("keydown", (event) => {
       if (
         event.key === "ArrowRight" ||

@@ -1,12 +1,17 @@
 import properties from "./Properties";
 import { isNotIncludes } from "./Util";
+import options from "./Options";
 
 export const slides = (() => {
   let slideBlocks = [];
 
   // first page
-  slideBlocks.push(document.querySelector(properties.pageCoverSelector));
-  slideBlocks.push(document.querySelector(properties.pageTitleAndPropSelector));
+  if (options.useCoverAsFirstSlide) {
+    slideBlocks.push(document.querySelector(properties.pageCoverSelector));
+    slideBlocks.push(
+      document.querySelector(properties.pageTitleAndPropSelector)
+    );
+  }
 
   const notionPageBlocks = Array.from(
     document.querySelectorAll(properties.blockSelector)
@@ -15,10 +20,10 @@ export const slides = (() => {
   let internalSlides = [];
 
   notionPageBlocks.forEach((it, i, arr) => {
-    if (isNotIncludes(it.className, properties.separatorsBlocks)) {
+    if (isNotIncludes(it.className, options.separatorsBlocks)) {
       slideBlocks.push(it);
     } else {
-      internalSlides.push(slideBlocks);
+      if (slideBlocks.length > 0) internalSlides.push(slideBlocks);
       slideBlocks = [];
       slideBlocks.push(it);
     }

@@ -1,7 +1,17 @@
 body {
-  min-width: 170px;
+  min-width: 300px;
 }
 
 :root {
   --accent: gray;
+  font-size: 14px;
+}
+
+#app {
+  width: 100%;
+}
+
+#start {
+  margin-left: auto;
+  margin-right: auto;
 }
