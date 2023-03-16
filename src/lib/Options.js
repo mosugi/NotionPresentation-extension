@@ -10,8 +10,9 @@ export class Options {
     ];
     this.hiddenBlocks = options?.hiddenBlocks ?? [];
     this.enableKeyboard = options?.enableKeyboard ?? true;
-    // this.speechBlocks = options?.speechBlocks ?? [];
-    // this.animationBlocks = options?.animationBlocks ?? [];
+    // TODO stylesはENUMに
+    // TODO readAloudはObjectに
+    this.actionBlocksMap = [];
   }
 }
 

@@ -1,19 +1,15 @@
-import { slides } from "./lib/Slides";
 import { addAnimation, hiddenControls, styleFirstPage } from "./lib/Style";
-import { hidePageBlocks, showPageBlocks } from "./lib/Blocks";
 import { addKeyDownListener } from "./lib/KeyControl";
 import { addOsc } from "./lib/OnScreenControl";
+import slideShow from "./lib/Slideshow";
 
-const initPresentation = async (slides) => {
+const initPresentation = async () => {
   styleFirstPage();
   hiddenControls();
-  slides.forEach(hidePageBlocks);
   addOsc();
   addKeyDownListener();
   addAnimation();
+  slideShow.init();
 };
 
-initPresentation(slides.all()).then(() => {
-  console.log(slides.first());
-  showPageBlocks(slides.first());
-});
+await initPresentation();

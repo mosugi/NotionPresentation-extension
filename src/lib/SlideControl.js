@@ -1,14 +1,11 @@
-import { slides } from "./Slides";
 import { exitFullScreen } from "./FullScreen";
-import { hidePageBlocks, showPageBlocks } from "./Blocks";
+import slideShow from "./Slideshow";
 
 export const nextSlide = () => {
-  hidePageBlocks(slides.current());
-  showPageBlocks(slides.next());
+  slideShow.nextSlide();
 };
 export const previousSlide = () => {
-  hidePageBlocks(slides.current());
-  showPageBlocks(slides.previous());
+  slideShow.previousSlide();
 };
 export const exitSlide = () => {
   exitFullScreen();
