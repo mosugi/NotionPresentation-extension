@@ -6,7 +6,7 @@ export const addKeyDownListener = (
   slideControl: SlideControl,
   enableKeyboard: boolean
 ) => {
-  if (enableKeyboard) {
+  if (true) {
     document.body.addEventListener("keydown", async (event) => {
       if (
         event.key === "ArrowRight" ||
@@ -23,7 +23,12 @@ export const addKeyDownListener = (
         toggleFullScreen()
       }
       if (event.key === "Escape" || event.key === "e") {
-        await slideControl.exit()
+        slideControl.exit()
+      }
+      if (event.key === "p") {
+        console.log("Auto presentation start.")
+        await slideControl.auto()
+        console.log("Auto presentation end.")
       }
     })
   }

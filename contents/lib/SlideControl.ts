@@ -17,4 +17,12 @@ export class SlideControl {
     exitFullScreen()
     window.location.reload()
   }
+  async auto() {
+    while (this.slideshow.hasNext()) {
+      await this.slideshow.nextSlide()
+      while (this.slideshow.current().hasNextActionBlock()) {
+        await this.slideshow.nextSlide()
+      }
+    }
+  }
 }

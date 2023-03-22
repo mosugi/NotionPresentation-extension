@@ -1,14 +1,15 @@
 {
   "name": "notion-presentation",
   "displayName": "__MSG_Name__",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "__MSG_Description__",
   "author": "mosugi",
   "scripts": {
     "dev": "plasmo dev",
     "build": "plasmo build",
     "package": "plasmo package",
-    "fmt": "prettier --write ."
+    "fmt": "prettier --write .",
+    "zip": "rm -f ./build/app.zip && zip -r ./build/app.zip build/chrome-mv3-prod"
   },
   "dependencies": {
     "@plasmohq/messaging": "^0.1.6",

@@ -36,7 +36,7 @@ const BlockOptionItem = (props: Props) => {
           <option value={"none" as BlockStyle}>Style: none</option>
           <option value={"fade" as BlockStyle}>Style: Fade in</option>
           <option value={"slide" as BlockStyle}>Style: Slide in</option>
-          {/*<option value={"caption" as BlockStyle}>Style: Caption</option>*/}
+          <option value={"caption" as BlockStyle}>Style: Caption</option>
           <option value={"hide" as BlockStyle}>Style: Hidden</option>
         </select>
         <label>
@@ -53,20 +53,20 @@ const BlockOptionItem = (props: Props) => {
           />
           Use as separator
         </label>
-        {/*<label>*/}
-        {/*  <input*/}
-        {/*    checked={blockOption.isReadAloud}*/}
-        {/*    type="checkbox"*/}
-        {/*    onChange={(e) =>*/}
-        {/*      setBlockOption({*/}
-        {/*        style: blockOption.style,*/}
-        {/*        useAsSeparator: blockOption.useAsSeparator,*/}
-        {/*        isReadAloud: e.target.checked*/}
-        {/*      })*/}
-        {/*    }*/}
-        {/*  />*/}
-        {/*  Read aloud*/}
-        {/*</label>*/}
+        <label>
+          <input
+            checked={blockOption.isReadAloud}
+            type="checkbox"
+            onChange={(e) =>
+              setBlockOption({
+                style: blockOption.style,
+                useAsSeparator: blockOption.useAsSeparator,
+                isReadAloud: e.target.checked
+              })
+            }
+          />
+          Read aloud
+        </label>
       </p>
     </section>
   )

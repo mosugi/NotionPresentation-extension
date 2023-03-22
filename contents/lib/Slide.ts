@@ -1,3 +1,4 @@
+import { blockToSpeech } from "~contents/lib/TextToSpeech"
 import { setElementStyle } from "~contents/lib/Util"
 import type { BlockOption, BlockStyle } from "~types/BlockOption"
 import { SlideBlockStyle } from "~types/BlockOption"
@@ -53,7 +54,7 @@ export class Slide {
   hasNextActionBlock() {
     return !!this.blocksWithOption[this.blockWithOptionIndex]
   }
-  doAction() {
+  async doAction() {
     const setStyles = (block: blockWithOption) => {
       const styles = Object.values(SlideBlockStyle)
         .filter((it) => it.name === block.style)
@@ -61,16 +62,21 @@ export class Slide {
       styles.map((it) => setElementStyle(block.target, it.prop, it.value))
     }
 
-    const readAloud = (optionBlock) => {
-      console.log(optionBlock.readAloud)
+    const readAloud = async (optionBlock) => {
+      console.log(optionBlock)
+      if (optionBlock.readAloud)
+        await blockToSpeech(optionBlock.target.innerText)
+      if (optionBlock.style === "caption")
+        setElementStyle(optionSetBlock.target, "display", "none")
     }
 
     const optionSetBlock = this.blocksWithOption[this.blockWithOptionIndex]
 
     setStyles(optionSetBlock)
-    readAloud(optionSetBlock)
-
     setElementStyle(optionSetBlock.target, "opacity", "1")
+
+    await readAloud(optionSetBlock)
+
     this.blockWithOptionIndex = this.blockWithOptionIndex + 1
   }
 }

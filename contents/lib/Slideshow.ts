@@ -100,10 +100,9 @@ export class Slideshow {
         : this.currentSlideIndex
     return this.current()
   }
-  nextSlide() {
-    console.log(this.current())
+  async nextSlide() {
     if (this.current().hasNextActionBlock()) {
-      this.current().doAction()
+      await this.current().doAction()
     } else {
       this.current().hidePageBlocks()
       this.next().showPageBlocks()
