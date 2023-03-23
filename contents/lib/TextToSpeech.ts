@@ -1,4 +1,6 @@
-const speechSynthesisUtterance = (text) => {
+import * as sdk from "microsoft-cognitiveservices-speech-sdk"
+
+const browserSpeechSynthesis = (text) => {
   return new Promise((resolve, reject) => {
     speechSynthesis.cancel()
     let u = new SpeechSynthesisUtterance(text)
@@ -8,33 +10,44 @@ const speechSynthesisUtterance = (text) => {
   })
 }
 
+const azureSpeechSynthesis = (phraseText) => {
+  let player = new sdk.SpeakerAudioDestination()
+  let audioConfig = sdk.AudioConfig.fromSpeakerOutput(player)
+  let speechConfig = sdk.SpeechConfig.fromSubscription(
+    "",
+    "eastus"
+  )
+  speechConfig.speechSynthesisLanguage = "ja-JP"
+  speechConfig.speechSynthesisVoiceName = "ja-JP-DaichiNeural"
+
+  let synthesizer = new sdk.SpeechSynthesizer(speechConfig, audioConfig)
+
+  return new Promise((resolve, reject) => {
+    synthesizer.speakTextAsync(
+      phraseText,
+      function (result) {
+        synthesizer.close()
+        synthesizer = undefined
+        player.onAudioEnd = function () {
+          resolve(result)
+        }
+      },
+      function (err) {
+        console.log(err)
+        synthesizer.close()
+        reject(err)
+      }
+    )
+  })
+}
+
 export const blockToSpeech = async (text) => {
   const textToSpeech = normalize(text)
   if (textToSpeech !== "") {
-    await speechSynthesisUtterance(textToSpeech).catch(console.error)
+    // await speechSynthesisUtterance(textToSpeech).catch(console.error)
+    await azureSpeechSynthesis(textToSpeech).catch(console.error)
   }
 }
-
-// export const speechBlocks = async (blocks, speechClasses, captionClasses) => {
-//     for (const it of blocks) {
-//         if (isIncludes(it.className, captionClasses)) {
-//             showCaption(it);
-//         }
-//
-//         if (
-//             isIncludes(it.className, speechClasses) &&
-//             normalize(it.innerText) !== ""
-//         ) {
-//             await speechSynthesisUtterance(normalize(it.innerText)).catch(
-//                 console.error
-//             );
-//         }
-//
-//         if (isIncludes(it.className, captionClasses)) {
-//             hideCaption(it);
-//         }
-//     }
-// };
 
 const normalize = (text) => {
   return (text || "")

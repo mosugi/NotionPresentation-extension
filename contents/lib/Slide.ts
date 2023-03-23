@@ -66,6 +66,7 @@ export class Slide {
       console.log(optionBlock)
       if (optionBlock.readAloud)
         await blockToSpeech(optionBlock.target.innerText)
+      // 一旦display:blockになっているので、表示がガタついてしまう
       if (optionBlock.style === "caption")
         setElementStyle(optionSetBlock.target, "display", "none")
     }
