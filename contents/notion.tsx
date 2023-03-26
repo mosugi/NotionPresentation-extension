@@ -14,7 +14,12 @@ import {
   insertAnimationStyles,
   styleFirstPage
 } from "~contents/lib/Style"
-import { isIncludes, objToList } from "~contents/lib/Util"
+import {
+  isIncludes,
+  isNotionSite,
+  isNotionSo,
+  objToList
+} from "~contents/lib/Util"
 import { NotionBlock } from "~types/Block"
 import type { BlockOption } from "~types/BlockOption"
 
@@ -52,9 +57,11 @@ async function startPresentation() {
   insertAnimationStyles()
 
   const slideControl = new SlideControl(slideshow)
-  addOnScreenControl(slideControl)
-  const enableKeyboard = (await storage.get<boolean>("enableKeyboard")) ?? false
-  addKeyDownListener(slideControl, enableKeyboard)
+  const enableOnScreenControl =
+    (await storage.get<boolean>("enableOnScreenControl")) ?? true
+  if (enableOnScreenControl || isNotionSo()) addOnScreenControl(slideControl)
+  const enableKeyboard = (await storage.get<boolean>("enableKeyboard")) ?? true
+  if (enableKeyboard && isNotionSite()) addKeyDownListener(slideControl)
 
   if (startInFullScreen) {
     requestFullScreen()

@@ -1,8 +1,7 @@
 import type { BlockType } from "notion-types"
 
+import { coverSelector, titleTagWrapperSelector } from "~contents/lib/Style"
 import { isNotIncludes } from "~contents/lib/Util"
-import type { Props } from "~popup/BlockOptionItem"
-import type { ActionBlock } from "~types/ActionBlock"
 import type { BlockOption, BlockOptions } from "~types/BlockOption"
 
 import { Slide } from "./Slide"
@@ -15,9 +14,7 @@ type Options = {
 
 export class Slideshow {
   private blockSelector = ".notion-page-content > .notion-selectable"
-  private pageTitleAndPropSelector =
-    ".pseudoSelection:first-of-type + div > div > div"
-  private pageCoverSelector = ".pseudoSelection:first-of-type"
+  ".pseudoSelection:first-of-type + div > div > div"
 
   private currentSlideIndex: number
   private readonly slides: Slide[]
@@ -40,22 +37,24 @@ export class Slideshow {
 
   createSlides() {
     let slide = new Slide(this.blockOptions)
+    let internalSlides = []
+
     if (this.useCoverAsFirstSlide) {
-      slide.add(document.querySelector(this.pageCoverSelector))
-      slide.add(document.querySelector(this.pageTitleAndPropSelector))
+      slide.add(document.querySelector(coverSelector))
+      slide.add(document.querySelector(titleTagWrapperSelector))
+      internalSlides.push(slide)
+      slide = new Slide(this.blockOptions)
     }
 
     const notionPageBlocks = Array.from(
       document.querySelectorAll(this.blockSelector)
     )
 
-    let internalSlides = []
-
     notionPageBlocks.forEach((it, i, arr) => {
       if (isNotIncludes(it.className, this.separatorBlocks)) {
         slide.add(it)
       } else {
-        if (slide.blocks.length > 0) internalSlides.push(slide)
+        internalSlides.push(slide)
         slide = new Slide(this.blockOptions)
         slide.add(it)
       }

@@ -9,3 +9,5 @@ export const setElementStyle = (target, prop, value) => {
 }
 export const objToList = (obj) =>
   Object.entries(obj).map(([key, value]) => ({ key, value }))
+export const isNotionSite = () => location.hostname.includes("notion.site")
+export const isNotionSo = () => location.hostname.includes("notion.so")

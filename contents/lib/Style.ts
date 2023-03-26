@@ -1,31 +1,36 @@
 import { setStyle } from "~contents/lib/Util"
 
+export const coverSelector =
+  "#notion-app > div > div:nth-child(1) > div > div:nth-child(1) > div.notion-frame > div > div.whenContentEditable > div.pseudoSelection > div"
+const coverInnerSelector = `${coverSelector} > div:nth-child(1) > div`
+const coverInnerImageSelector = `${coverInnerSelector} > div > img`
+
+export const titleTagWrapperSelector =
+  "#notion-app > div > div:nth-child(1) > div > div:nth-child(1) > div.notion-frame > div > div.whenContentEditable > div:nth-child(3) > div"
+const titleSelector = `${titleTagWrapperSelector} > div:nth-child(1)`
+const tagSelector = `${titleTagWrapperSelector} > div:nth-child(2)`
+
+// title & tag
+// #notion-app > div > div:nth-child(1) > div > div:nth-child(1) > div.notion-frame > div > div.whenContentEditable > div:nth-child(3) > div
+
 export const styleFirstPage = (useCoverAsFirstSlide: boolean) => {
-  const coverImage = document.querySelector(
-    ".pseudoSelection > div > div > div"
-  )
+  const coverImage = document.querySelector(coverInnerImageSelector)
+
   if (coverImage) {
-    setStyle(".pseudoSelection > div", "height", "80vh") // Cover original 30vh
-    setStyle(".pseudoSelection > div > div > div", "height", "80vh") // Cover original 30vh
-    setStyle(".pseudoSelection > div > div > div > div > img", "height", "80vh") // Cover original 30vh
+    setStyle(coverSelector, "height", "80vh") // original 30vh
+    setStyle(coverInnerSelector, "height", "80vh") // original 30vh
+    setStyle(coverInnerImageSelector, "height", "80vh") // original 30vh
   } else {
-    setStyle(
-      ".pseudoSelection:first-of-type + div > div",
-      "position",
-      "absolute"
-    ) // Title original ''
-    setStyle(".pseudoSelection:first-of-type + div > div", "top", "50%") // Title original ''
-    setStyle(
-      ".pseudoSelection:first-of-type + div > div",
-      "transform",
-      "translateY(-50%)"
-    ) // Title original ''
+    setStyle(titleSelector, "position", "absolute") // original ''
+    setStyle(titleSelector, "top", "50%") // original ''
+    setStyle(titleSelector, "transform", "translateY(-50%)") // original ''
   }
-  setStyle(".pseudoSelection:first-of-type + div > div", "width", "100%") // Title original 900px
-  setStyle(".pseudoSelection:first-of-type + div > div", "textAlign", "center") // Title original ''
+  setStyle(titleSelector, "width", "100%") // original 900px
+  setStyle(titleSelector, "textAlign", "center") // original ''
+  setStyle(tagSelector, "display", "none")
   if (!useCoverAsFirstSlide) {
-    setStyle(".pseudoSelection > div", "display", "none") // Cover
-    setStyle(".pseudoSelection:first-of-type + div > div", "display", "none") // Title
+    setStyle(coverSelector, "display", "none")
+    setStyle(titleTagWrapperSelector, "display", "none")
   }
 }
 export const hideControls = () => {

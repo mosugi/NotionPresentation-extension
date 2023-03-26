@@ -42,7 +42,12 @@ const IndexPopup = () => {
     "useCoverAsFirstSlide",
     (v) => (v === undefined ? true : v)
   )
+  const [enableOnScreenControl, setEnableOnScreenControl] = useStorage(
+    "enableOnScreenControl",
+    true
+  )
   const [enableKeyboard, setEnableKeyboard] = useStorage("enableKeyboard", true)
+
   const [separatorBlocks, setSeparatorBlocks] = useStorage<BlockType[]>(
     "separatorBlocks",
     (v) => (v === undefined ? ["header-block"] : v)
@@ -124,10 +129,20 @@ const IndexPopup = () => {
         <label>
           <input
             type={"checkbox"}
+            checked={enableOnScreenControl}
+            onChange={(e) => setEnableOnScreenControl(e.target.checked)}
+          />
+          Enable on screen control
+        </label>
+      </p>
+      <p>
+        <label>
+          <input
+            type={"checkbox"}
             checked={enableKeyboard}
             onChange={(e) => setEnableKeyboard(e.target.checked)}
           />
-          Enable KeyControl <small>*notion.site only</small>
+          Enable Keyboard control <small>*notion.site only</small>
         </label>
       </p>
       <details>
