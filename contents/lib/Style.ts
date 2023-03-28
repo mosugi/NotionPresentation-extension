@@ -34,6 +34,7 @@ export const styleFirstPage = (useCoverAsFirstSlide: boolean) => {
   }
 }
 export const hideControls = () => {
+  setStyle(".notion-frame", "height", "100vh")
   setStyle(".notion-topbar", "display", "none")
   setStyle(".notion-page-controls", "display", "none")
 }

@@ -4,17 +4,17 @@ import { toggleFullScreen } from "./OnScreenControl"
 
 export const addKeyDownListener = (slideControl: SlideControl) => {
   document.body.addEventListener("keydown", async (event) => {
-    if (event.key === "ArrowRight" || event.key === "s" || event.key === "d") {
+    if (event.key === "ArrowRight") {
       slideControl.next()
     }
 
-    if (event.key === "ArrowLeft" || event.key === "w" || event.key === "a") {
+    if (event.key === "ArrowLeft") {
       slideControl.previous()
     }
     if (event.key === "f") {
       toggleFullScreen()
     }
-    if (event.key === "Escape" || event.key === "e") {
+    if (event.key === "Escape") {
       await slideControl.exit()
     }
   })

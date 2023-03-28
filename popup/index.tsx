@@ -132,7 +132,7 @@ const IndexPopup = () => {
             checked={enableOnScreenControl}
             onChange={(e) => setEnableOnScreenControl(e.target.checked)}
           />
-          Enable on screen control
+          Enable on screen control <small>[←, →, F, Esc]</small>
         </label>
       </p>
       <p>

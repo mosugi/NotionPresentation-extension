@@ -14,7 +14,6 @@ type Options = {
 
 export class Slideshow {
   private blockSelector = ".notion-page-content > .notion-selectable"
-  ".pseudoSelection:first-of-type + div > div > div"
 
   private currentSlideIndex: number
   private readonly slides: Slide[]
@@ -54,7 +53,7 @@ export class Slideshow {
       if (isNotIncludes(it.className, this.separatorBlocks)) {
         slide.add(it)
       } else {
-        internalSlides.push(slide)
+        if (slide.blocks.length > 0) internalSlides.push(slide)
         slide = new Slide(this.blockOptions)
         slide.add(it)
       }
