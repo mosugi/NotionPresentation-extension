@@ -1,6 +1,6 @@
-import type { SlideControl } from "~contents/lib/SlideControl"
+import type { SlideControl } from "~contents/lib/slideControl"
 
-import { toggleFullScreen } from "./OnScreenControl"
+import { toggleFullScreen } from "./screenControl"
 
 export const addKeyDownListener = (slideControl: SlideControl) => {
   document.body.addEventListener("keydown", async (event) => {
@@ -9,7 +9,7 @@ export const addKeyDownListener = (slideControl: SlideControl) => {
     }
 
     if (event.key === "ArrowLeft") {
-      slideControl.previous()
+      slideControl.back()
     }
     if (event.key === "f") {
       toggleFullScreen()

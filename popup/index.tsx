@@ -1,15 +1,13 @@
 import "simpledotcss"
 import "./style.css"
 
-import type { BlockType } from "notion-types"
 import { useState } from "react"
 
 import { sendToContentScript } from "@plasmohq/messaging"
 import { Storage } from "@plasmohq/storage"
 import { useStorage } from "@plasmohq/storage/hook"
 
-import BlockOptionItem, { Props } from "~popup/BlockOptionItem"
-import type { ActionBlock } from "~types/ActionBlock"
+import BlockOptionItem, { Props } from "~popup/blockOptionItem"
 import { NotionBlock } from "~types/Block"
 
 const callInitPresentation = async (zoom) => {
@@ -48,36 +46,23 @@ const IndexPopup = () => {
   )
   const [enableKeyboard, setEnableKeyboard] = useStorage("enableKeyboard", true)
 
-  const [separatorBlocks, setSeparatorBlocks] = useStorage<BlockType[]>(
-    "separatorBlocks",
-    (v) => (v === undefined ? ["header-block"] : v)
-  )
-
-  const [blockOptions, setBlockOptions] = useState<Props[]>([
-    {
-      block: NotionBlock.HeaderBlock,
-      option: {
-        style: "none",
-        useAsSeparator: true,
-        isReadAloud: false
-      }
-    },
-    {
-      block: NotionBlock.SubHeaderBlock
-    },
-    {
-      block: NotionBlock.SubSubHeaderBlock
-    },
-    {
-      block: NotionBlock.DividerBlock
-    },
-    {
-      block: NotionBlock.TextBlock
-    },
-    {
-      block: NotionBlock.SyncBlock
+  const generateInitialBlockOptions = () => {
+    const blocks = Object.values(NotionBlock)
+    const blockOptions: Props[] = []
+    for (const block of blocks) {
+      blockOptions.push({
+        block,
+        option: {
+          style: "Nothing",
+          useAsSeparator: block.className === NotionBlock.HeaderBlock.className,
+          isReadAloud: false
+        }
+      })
     }
-  ])
+    return blockOptions
+  }
+
+  const [blockOptions, _] = useState<Props[]>(generateInitialBlockOptions())
 
   const blockOptionItems = blockOptions.map((it) => (
     <BlockOptionItem
@@ -146,23 +131,16 @@ const IndexPopup = () => {
         </label>
       </p>
       <details>
-        <summary>Block Options</summary>
+        <summary>Advanced Settings</summary>
+        <strong>Block Options</strong>
+        <hr />
         {blockOptionItems}
-        {/*<label>*/}
-        {/*Add more custom:*/}
-        {/*<select>*/}
-        {/*  <option value="1">H3</option>*/}
-        {/*  <option value="2">Divider</option>*/}
-        {/*  <option value="3">Text</option>*/}
-        {/*</select>*/}
-        {/*  <button onClick={() => setBlockOptions(blockOptions.reverse)}>Add</button>*/}
-        {/*</label>*/}
+        <button onClick={resetSettings}>Restore defaults</button>
       </details>
 
       <button onClick={() => callInitPresentation(zoom)}>
         Start Slide Show
       </button>
-      <button onClick={resetSettings}>Reset Settings</button>
     </div>
   )
 }

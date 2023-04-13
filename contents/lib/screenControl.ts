@@ -1,6 +1,6 @@
-import type { SlideControl } from "~contents/lib/SlideControl"
+import type { SlideControl } from "~contents/lib/slideControl"
 
-import { exitFullScreen, requestFullScreen } from "./FullScreen"
+import { exitFullScreen, requestFullScreen } from "./fullScreen"
 
 export const toggleFullScreen = () => {
   const osc: HTMLElement = document.querySelector(
@@ -52,7 +52,7 @@ export const addOnScreenControl = (slideControl: SlideControl) => {
 
   document
     .querySelector("#notion-presentation-osc-previous")
-    .addEventListener("click", () => slideControl.previous())
+    .addEventListener("click", () => slideControl.back())
   document
     .querySelector("#notion-presentation-osc-switchFull")
     .addEventListener("click", () => toggleFullScreen())

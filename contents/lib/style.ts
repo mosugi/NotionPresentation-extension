@@ -1,4 +1,4 @@
-import { setStyle } from "~contents/lib/Util"
+import { setStyle } from "~contents/lib/util"
 
 export const coverSelector =
   "#notion-app > div > div:nth-child(1) > div > div:nth-child(1) > div.notion-frame > div > div.whenContentEditable > div.pseudoSelection > div"
@@ -13,7 +13,7 @@ const tagSelector = `${titleTagWrapperSelector} > div:nth-child(2)`
 // title & tag
 // #notion-app > div > div:nth-child(1) > div > div:nth-child(1) > div.notion-frame > div > div.whenContentEditable > div:nth-child(3) > div
 
-export const styleFirstPage = (useCoverAsFirstSlide: boolean) => {
+export const styleFirstPage = (useCoverAsFirstSlide: boolean = true) => {
   const coverImage = document.querySelector(coverInnerImageSelector)
 
   if (coverImage) {

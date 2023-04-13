@@ -1,4 +1,4 @@
-export type BlockStyle = "none" | "fade" | "slide" | "caption" | "hide"
+export type BlockStyle = "Nothing" | "Fade In" | "Slide In" | "Caption" | "Hide"
 
 export type BlockOption = {
   style: BlockStyle
@@ -6,24 +6,20 @@ export type BlockOption = {
   isReadAloud: boolean
 }
 
-export type BlockOptions = {
-  [key: string]: BlockOption
-}
-
 export const SlideBlockStyle = {
   None: {
-    name: "none",
+    name: "Nothing",
     styles: []
   },
   Fade: {
-    name: "fade",
+    name: "Fade In",
     styles: [
       { prop: "animationDuration", value: "1s" },
       { prop: "animationName", value: "fade-in" }
     ]
   },
   Slide: {
-    name: "slide",
+    name: "Slide In",
     styles: [
       [
         { prop: "animationDuration", value: "1s" },
@@ -32,7 +28,7 @@ export const SlideBlockStyle = {
     ]
   },
   Caption: {
-    name: "caption",
+    name: "Caption",
     styles: [
       { prop: "bottom", value: "16px" },
       { prop: "position", value: "fixed" },
@@ -41,10 +37,15 @@ export const SlideBlockStyle = {
     ]
   },
   Hide: {
-    name: "hide",
+    name: "Hide",
     styles: [[{ prop: "display", value: "none" }]]
   }
 }
 
 export type SlideBlockStyle =
   (typeof SlideBlockStyle)[keyof typeof SlideBlockStyle]
+
+export const getSlideStyles = (style: string) =>
+  Object.values(SlideBlockStyle)
+    .filter((it) => it.name === style)
+    .flatMap((it) => it.styles)

@@ -4,6 +4,7 @@ body {
 
 :root {
   --accent: gray;
+  --accent-bg: #fbfbfa;
   font-size: 14px;
 }
 
