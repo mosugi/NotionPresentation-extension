@@ -29,7 +29,6 @@ async function startPresentation() {
 
   hideControls()
   styleFirstPage(storage.useCoverAsFirstSlide)
-  // insertAnimationStyles()
 
   const slideControl = createSlideControl(slideshow)
   if ((storage.enableOnScreenControl ?? true) || isNotionSo())
@@ -53,7 +52,9 @@ const notion = () => {
     isPresentationStarted = true
     res.send(`${req.name} received.`)
   })
+
   insertAnimationStyles()
+
   // TODO .notion-topbarからも起動できるようボタン追加する
   return <div></div>
 }

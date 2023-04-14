@@ -3,6 +3,7 @@ import { isActionBlock } from "~contents/lib/block"
 import { CustomIterator, makeCustomIterator } from "~contents/lib/iterator"
 import {
   Slide,
+  applyAfterOption,
   applyOption,
   hideSlideBlocks,
   showSlideBlocks
@@ -32,9 +33,10 @@ export const createSlideControl = (slideshow: Slideshow): SlideControl => {
       )
       showSlideBlocks(currentSlide)
     },
-    next: () => {
+    next: async () => {
       if (slideBlockIterator.hasNext()) {
-        applyOption(slideBlockIterator.next().value)
+        applyAfterOption(slideBlockIterator.current().value)
+        await applyOption(slideBlockIterator.next().value)
       } else if (slideIterator.hasNext()) {
         hideSlideBlocks(currentSlide)
         currentSlide = slideIterator.next().value
