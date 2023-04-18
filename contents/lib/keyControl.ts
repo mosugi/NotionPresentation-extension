@@ -14,6 +14,9 @@ export const addKeyDownListener = (slideControl: SlideControl) => {
     if (event.key === "f") {
       toggleFullScreen()
     }
+    if (event.key === "a") {
+      await slideControl.auto()
+    }
     if (event.key === "Escape") {
       await slideControl.exit()
     }

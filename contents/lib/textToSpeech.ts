@@ -35,7 +35,7 @@ const getAzureSpeechSynthesisConfig =
     }
   }
 
-const azureSpeechSynthesis = async (phraseText, config) => {
+const azureSpeechSynthesisSSML = async (phraseText, config) => {
   // TODO 複数同時に稼働してしまうためシングルトンにする
   let player = new sdk.SpeakerAudioDestination()
   let audioConfig = sdk.AudioConfig.fromSpeakerOutput(player)
@@ -48,9 +48,16 @@ const azureSpeechSynthesis = async (phraseText, config) => {
 
   let synthesizer = new sdk.SpeechSynthesizer(speechConfig, audioConfig)
 
+  const ssmlText = `
+<speak version="1.0" xmlns="https://www.w3.org/2001/10/synthesis" xml:lang="${config.language}">
+<voice name="${config.voiceName}">
+${phraseText}
+</voice>
+</speak>
+`
   return new Promise((resolve, reject) => {
-    synthesizer.speakTextAsync(
-      phraseText,
+    synthesizer.speakSsmlAsync(
+      ssmlText,
       function (result) {
         synthesizer.close()
         synthesizer = undefined
@@ -68,24 +75,33 @@ const azureSpeechSynthesis = async (phraseText, config) => {
 }
 
 export const blockToSpeech = async (text) => {
-  const textToSpeech = normalize(text)
-  console.log(textToSpeech)
+  const textToSpeech = applySub(text)
+
   if (textToSpeech !== "") {
+    console.log(textToSpeech)
     const config = await getAzureSpeechSynthesisConfig()
-    console.log(config)
     if (config.subscriptionKey) {
-      await azureSpeechSynthesis(textToSpeech, config).catch(console.error)
+      await azureSpeechSynthesisSSML(textToSpeech, config).catch(console.error)
     } else {
       await browserSpeechSynthesis(textToSpeech).catch(console.error)
     }
   }
 }
 
-const normalize = (text) => {
+const normalize = (text: string) => {
   return (text || "")
     .replace(
       /[^a-zA-Z0-9-\u4e00-\u9FFF\u3041-\u3096\u30A1-\u30FC\u3000-\u303F]/g,
       ""
     )
     .trim()
+}
+
+const applySub = (text: string) => {
+  const subMap: string[][] = []
+  const replacedText = subMap.reduce(
+    (acc, cur) => acc.replaceAll(cur[0], cur[1]),
+    text
+  )
+  return normalize(replacedText)
 }
