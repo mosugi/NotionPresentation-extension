@@ -74,8 +74,17 @@ ${phraseText}
   })
 }
 
+const parseCsvToArray = (csvText) => {
+  return csvText ? csvText.split("\n").map((row) => row.split(",")) : []
+}
+
 export const blockToSpeech = async (text) => {
-  const textToSpeech = applySub(text)
+  const storage = new Storage()
+  const speakTextReplaceRules = await storage.get("speakTextReplaceRules")
+  const textToSpeech = applyReplaceRules(
+    text,
+    parseCsvToArray(speakTextReplaceRules)
+  )
 
   if (textToSpeech !== "") {
     console.log(textToSpeech)
@@ -97,11 +106,7 @@ const normalize = (text: string) => {
     .trim()
 }
 
-const applySub = (text: string) => {
-  const subMap: string[][] = []
-  const replacedText = subMap.reduce(
-    (acc, cur) => acc.replaceAll(cur[0], cur[1]),
-    text
-  )
-  return normalize(replacedText)
+const applyReplaceRules = (text: string, rules: string[][]) => {
+  const normalized = normalize(text)
+  return rules.reduce((acc, cur) => acc.replaceAll(cur[0], cur[1]), normalized)
 }
