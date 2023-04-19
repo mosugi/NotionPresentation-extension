@@ -31,6 +31,14 @@ const OptionsIndex = () => {
   const [azureTextToSpeechVoiceName, setAzureTextToSpeechVoiceName] =
     useStorage("azureTextToSpeechVoiceName", "ja-JP-DaichiNeural")
 
+  const [hailingFrequency, _, { setRenderValue, setStoreValue }] = useStorage(
+    "speakTextReplaceRules"
+  )
+
+  const parseCsvToArray = async (csvText) => {
+    return csvText.split("\n").map((row) => row.split(","))
+  }
+
   return (
     <div>
       <h1>Notion Presentation Advanced Options</h1>
@@ -97,6 +105,17 @@ const OptionsIndex = () => {
             />
           </label>
         </p>
+        <fieldset>
+          <legend>Speak text replace rules</legend>
+          <p>
+            <textarea
+              placeholder={"Notion,Notion"}
+              value={hailingFrequency}
+              onChange={(e) => setRenderValue(e.target.value)}
+            />
+            <button onClick={() => setStoreValue()}>Save rules</button>
+          </p>
+        </fieldset>
       </details>
     </div>
   )
