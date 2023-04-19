@@ -21,10 +21,8 @@ export const SlideBlockStyle = {
   Slide: {
     name: "Slide In",
     styles: [
-      [
-        { prop: "animationDuration", value: "1s" },
-        { prop: "animationName", value: "slide-in" }
-      ]
+      { prop: "animationDuration", value: "1s" },
+      { prop: "animationName", value: "slide-in" }
     ]
   },
   Caption: {

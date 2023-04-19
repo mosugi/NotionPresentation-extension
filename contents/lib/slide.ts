@@ -27,10 +27,12 @@ export const applyOption = async (block: SlideBlock) => {
   getSlideStyles(block.option.style).map((it) =>
     setElementStyle(block.target, it.prop, it.value)
   )
+  getSlideStyles(block.option.style).map(console.log)
   if (block.option.style === "Caption") {
     showBlock(block)
   }
   setElementStyle(block.target, "opacity", "1")
+  block.target.offsetHeight // force reflow
   if (block.option.isReadAloud) {
     await readAloud(block)
   }
