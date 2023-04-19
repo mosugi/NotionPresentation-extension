@@ -7,6 +7,7 @@ import { sendToContentScript } from "@plasmohq/messaging"
 import { Storage } from "@plasmohq/storage"
 import { useStorage } from "@plasmohq/storage/hook"
 
+import { isNotionBlockOption } from "~contents/lib/blockOption"
 import BlockOptionItem, { Props } from "~popup/blockOptionItem"
 import { NotionBlock } from "~types/Block"
 
@@ -19,9 +20,13 @@ const callInitPresentation = async (zoom) => {
   window.close()
 }
 
-const resetSettings = async () => {
-  const storage = new Storage()
-  await storage.clear()
+const restoreBlockOption = async () => {
+  const storage = await new Storage()
+  const removes = Object.entries(await storage.getAll())
+    .filter(isNotionBlockOption)
+    .map(async ([key, _]) => await storage.remove(key))
+  await Promise.all(removes)
+  debugger
   window.location.reload()
 }
 
@@ -135,7 +140,7 @@ const IndexPopup = () => {
         <strong>Block Options</strong>
         <hr />
         {blockOptionItems}
-        <button onClick={resetSettings}>Restore defaults</button>
+        <button onClick={restoreBlockOption}>Restore default options</button>
       </details>
 
       <button onClick={() => callInitPresentation(zoom)}>

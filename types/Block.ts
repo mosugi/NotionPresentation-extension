@@ -59,10 +59,6 @@ export const NotionBlock = {
   },
   // -- Advanced blocks --
   // Table of contents notion-table-block
-  TableOfContentsBlock: {
-    displayName: "Table of Contents",
-    className: "notion-table-block"
-  },
   // Block equation notion-equation-block
   EquationBlock: {
     displayName: "Equation",
