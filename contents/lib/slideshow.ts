@@ -6,7 +6,7 @@ import type { BlockOption } from "~types/BlockOption"
 
 export type Slideshow = Slide[]
 
-const blockSelector = ".notion-page-content > .notion-selectable"
+const blockSelector = ".notion-page-content .notion-selectable"
 
 const makeSlidesWithSeparator = (accumulator, currentValue) => {
   if (isSeparator(currentValue)) {

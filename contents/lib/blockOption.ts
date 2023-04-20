@@ -1,6 +1,7 @@
 import type { BlockOption } from "~types/BlockOption"
 
-const isNotionBlockOption = ([key, _]: string[]) => key.startsWith("notion-")
+export const isNotionBlockOption = ([key, _]: string[]) =>
+  key.startsWith("notion-")
 
 const toBlockOption = ([key, value]: string[]) => {
   return [

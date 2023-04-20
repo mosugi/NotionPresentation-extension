@@ -18,6 +18,23 @@ const OptionsIndex = () => {
     ""
   )
 
+  const [azureTextToSpeechLanguage, setAzureTextToSpeechLanguage] = useStorage(
+    "azureTextToSpeechLanguage",
+    "ja-JP"
+  )
+
+  const [azureTextToSpeechRegion, setAzureTextToSpeechRegion] = useStorage(
+    "azureTextToSpeechRegion",
+    "eastus"
+  )
+
+  const [azureTextToSpeechVoiceName, setAzureTextToSpeechVoiceName] =
+    useStorage("azureTextToSpeechVoiceName", "ja-JP-DaichiNeural")
+
+  const [hailingFrequency, _, { setRenderValue, setStoreValue }] = useStorage(
+    "speakTextReplaceRules"
+  )
+
   return (
     <div>
       <h1>Notion Presentation Advanced Options</h1>
@@ -45,15 +62,57 @@ const OptionsIndex = () => {
           Enable ReadAloud
         </label>
       </p>
-      <p>
-        <label>
-          Azure Text to Speech Key:
-          <input
-            onChange={(e) => setAzureTextToSpeechKey(e.target.value)}
-            value={azureTextToSpeechKey}
-          />
-        </label>
-      </p>
+      <details>
+        <summary>Advanced Settings</summary>
+        <strong>Azure Text to Speech</strong>
+        <p>
+          <label>
+            Subscription key:
+            <input
+              onChange={(e) => setAzureTextToSpeechKey(e.target.value)}
+              value={azureTextToSpeechKey}
+            />
+          </label>
+        </p>
+        <p>
+          <label>
+            Region:
+            <input
+              onChange={(e) => setAzureTextToSpeechRegion(e.target.value)}
+              value={azureTextToSpeechRegion}
+            />
+          </label>
+        </p>
+        <p>
+          <label>
+            Voice name:
+            <input
+              onChange={(e) => setAzureTextToSpeechVoiceName(e.target.value)}
+              value={azureTextToSpeechVoiceName}
+            />
+          </label>
+        </p>
+        <p>
+          <label>
+            Language:
+            <input
+              onChange={(e) => setAzureTextToSpeechLanguage(e.target.value)}
+              value={azureTextToSpeechLanguage}
+            />
+          </label>
+        </p>
+        <fieldset>
+          <legend>Speak text replace rules</legend>
+          <p>
+            <textarea
+              placeholder={"Notion,Notion"}
+              value={hailingFrequency}
+              onChange={(e) => setRenderValue(e.target.value)}
+            />
+            <button onClick={() => setStoreValue()}>Save rules</button>
+          </p>
+        </fieldset>
+      </details>
     </div>
   )
 }

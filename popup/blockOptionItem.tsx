@@ -5,7 +5,7 @@ import type { BlockOption, BlockStyle } from "~types/BlockOption"
 import { SlideBlockStyle } from "~types/BlockOption"
 
 const defaultBlockOption: BlockOption = {
-  style: "none" as BlockStyle,
+  style: "Nothing",
   useAsSeparator: false,
   isReadAloud: false
 }
@@ -23,11 +23,15 @@ const BlockOptionItem = (props: Props) => {
 
   const [enableReadAloud, _] = useStorage("enableReadAloud", false)
 
-  const removeCaption = (v) => (enableReadAloud ? v.name != "Caption" : true)
+  const removeCaption = (v) => (enableReadAloud ? true : v.name != "Caption")
 
   const blockStyleItems = Object.values(SlideBlockStyle)
     .filter(removeCaption)
-    .map((v) => <option value={v.name}>{v.name}</option>)
+    .map((v) => (
+      <option value={v.name} key={v.name}>
+        {v.name}
+      </option>
+    ))
 
   return (
     <div>

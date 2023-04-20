@@ -21,17 +21,21 @@ export const SlideBlockStyle = {
   Slide: {
     name: "Slide In",
     styles: [
-      [
-        { prop: "animationDuration", value: "1s" },
-        { prop: "animationName", value: "slide-in" }
-      ]
+      { prop: "animationDuration", value: "1s" },
+      { prop: "animationName", value: "slide-in" }
     ]
   },
   Caption: {
     name: "Caption",
     styles: [
+      { prop: "textAlign", value: "center" },
       { prop: "bottom", value: "16px" },
+      { prop: "left", value: "50%" },
       { prop: "position", value: "fixed" },
+      { prop: "transform", value: "translate(-50%, -50%)" },
+      { prop: "zIndex", value: "100" },
+      { prop: "backdropFilter", value: "blur(8px)" },
+      { prop: "backgroundColor", value: "rgba(255,255,255,0.5)" },
       { prop: "animationDuration", value: "1s" },
       { prop: "animationName", value: "fade-in" }
     ]

@@ -59,10 +59,6 @@ export const NotionBlock = {
   },
   // -- Advanced blocks --
   // Table of contents notion-table-block
-  TableOfContentsBlock: {
-    displayName: "Table of Contents",
-    className: "notion-table-block"
-  },
   // Block equation notion-equation-block
   EquationBlock: {
     displayName: "Equation",
@@ -84,6 +80,10 @@ export const NotionBlock = {
   // Toggle heading 2 notion-sub_header-block
   // Toggle heading 3 notion-sub_sub_header-block
   // (2|3|4|5) columns notion-column_list-block
+  ColumnBlock: {
+    displayName: "Column",
+    className: "notion-column-block"
+  },
   ColumnListBlock: {
     displayName: "Column List",
     className: "notion-column_list-block"
