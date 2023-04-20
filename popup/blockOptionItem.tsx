@@ -27,7 +27,7 @@ const BlockOptionItem = (props: Props) => {
 
   const blockStyleItems = Object.values(SlideBlockStyle)
     .filter(removeCaption)
-    .map((v) => <option value={v.name}>{v.name}</option>)
+    .map((v) => <option value={v.name} key={v.name}>{v.name}</option>)
 
   return (
     <div>

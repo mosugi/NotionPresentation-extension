@@ -20,13 +20,12 @@ export const styleFirstPage = (useCoverAsFirstSlide: boolean = true) => {
     setStyle(coverSelector, "height", "80vh") // original 30vh
     setStyle(coverInnerSelector, "height", "80vh") // original 30vh
     setStyle(coverInnerImageSelector, "height", "80vh") // original 30vh
+    setStyle(titleSelector, "textAlign", "center") // original ''
+    setStyle(titleSelector, "width", "100%") // original 900px
   } else {
     setStyle(titleSelector, "position", "absolute") // original ''
     setStyle(titleSelector, "top", "50%") // original ''
-    setStyle(titleSelector, "transform", "translateY(-50%)") // original ''
   }
-  setStyle(titleSelector, "width", "100%") // original 900px
-  setStyle(titleSelector, "textAlign", "center") // original ''
   setStyle(tagSelector, "display", "none")
   if (!useCoverAsFirstSlide) {
     setStyle(coverSelector, "display", "none")

@@ -13,6 +13,7 @@ import {
 import type { Slideshow } from "~contents/lib/slideshow"
 
 import { exitFullScreen } from "./fullScreen"
+import {playPageVideos} from "~contents/lib/video";
 
 export type SlideControl = {
   init: () => void
@@ -75,6 +76,7 @@ export const createSlideControl = (slideshow: Slideshow): SlideControl => {
           )
           await new Promise((s) => setTimeout(s, 500))
           showSlideBlocks(currentSlide)
+          await playPageVideos(currentSlide)
         }
       }
     },
