@@ -7,6 +7,8 @@ import {
 } from "~contents/lib/block"
 import { blockToSpeech } from "~contents/lib/textToSpeech"
 import { setElementStyle } from "~contents/lib/util"
+import { playPageVideos } from "~contents/lib/video"
+import { NotionBlock } from "~types/Block"
 import { getSlideStyles } from "~types/BlockOption"
 
 export const showSlideBlocks = (slide: Slide) => {
@@ -47,6 +49,9 @@ export const applyAfterOption = (block: SlideBlock) => {
 const readAloud = async (block: SlideBlock) => {
   if (block.target.innerText) {
     await blockToSpeech(block.target.innerText)
+  }
+  if (block.target.className.includes(NotionBlock.VideoBlock.className)) {
+    await playPageVideos(block)
   }
 }
 
