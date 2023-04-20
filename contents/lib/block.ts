@@ -24,7 +24,7 @@ export const isActionBlock = (block: SlideBlock) =>
   block.option?.isReadAloud === true
 
 export const showBlock = (block: SlideBlock) =>
-    block?.target?.style ? (block.target.style.display = "block") : null
+  block?.target?.style ? (block.target.style.display = "block") : null
 
 export const hideBlock = (block: SlideBlock) =>
-    block?.target?.style ? block.target.style.display = "none" : null
+  block?.target?.style ? (block.target.style.display = "none") : null

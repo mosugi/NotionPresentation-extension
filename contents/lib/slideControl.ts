@@ -11,9 +11,9 @@ import {
   showSlideBlocks
 } from "~contents/lib/slide"
 import type { Slideshow } from "~contents/lib/slideshow"
+import { playPageVideos } from "~contents/lib/video"
 
 import { exitFullScreen } from "./fullScreen"
-import {playPageVideos} from "~contents/lib/video";
 
 export type SlideControl = {
   init: () => void

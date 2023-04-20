@@ -80,10 +80,14 @@ export const NotionBlock = {
   // Toggle heading 2 notion-sub_header-block
   // Toggle heading 3 notion-sub_sub_header-block
   // (2|3|4|5) columns notion-column_list-block
-  ColumnListBlock: {
-    displayName: "Column List",
-    className: "notion-column_list-block"
+  ColumnBlock: {
+    displayName: "Column",
+    className: "notion-column-block"
   },
+  // ColumnListBlock: {
+  //   displayName: "Column List",
+  //   className: "notion-column_list-block"
+  // },
   // Code - Mermaid notion-code-block
   // Embeds notion-embed-block
   EmbedBlock: { displayName: "Embed", className: "notion-embed-block" }

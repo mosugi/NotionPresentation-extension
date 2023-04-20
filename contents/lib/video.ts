@@ -1,12 +1,10 @@
-import {NotionBlock} from "~types/Block";
-import type {Slide} from "~contents/lib/slide";
+import type { Slide } from "~contents/lib/slide"
+import { NotionBlock } from "~types/Block"
 
-export const playPageVideos = async (slide:Slide) => {
+export const playPageVideos = async (slide: Slide) => {
   const videoBlocks = slide.filter((it) =>
     it?.target?.className?.includes(NotionBlock.VideoBlock.className)
   )
-  console.log(slide)
-  console.log(videoBlocks)
 
   for (const it of videoBlocks) {
     const video = it.target.querySelector("video")
