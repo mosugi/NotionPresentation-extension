@@ -84,10 +84,10 @@ export const NotionBlock = {
     displayName: "Column",
     className: "notion-column-block"
   },
-  // ColumnListBlock: {
-  //   displayName: "Column List",
-  //   className: "notion-column_list-block"
-  // },
+  ColumnListBlock: {
+    displayName: "Column List",
+    className: "notion-column_list-block"
+  },
   // Code - Mermaid notion-code-block
   // Embeds notion-embed-block
   EmbedBlock: { displayName: "Embed", className: "notion-embed-block" }

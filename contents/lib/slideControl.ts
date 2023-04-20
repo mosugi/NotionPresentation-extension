@@ -28,6 +28,18 @@ export const createSlideControl = (slideshow: Slideshow): SlideControl => {
   let slideBlockIterator: CustomIterator<SlideBlock>
   let currentSlide: Slide
 
+  const applyNextOption = async () => {
+    applyAfterOption(slideBlockIterator.current().value)
+    await applyOption(slideBlockIterator.next().value)
+  }
+
+  const switchNextSlide = () => {
+    hideSlideBlocks(currentSlide)
+    currentSlide = slideIterator.next().value
+    slideBlockIterator = makeCustomIterator(currentSlide.filter(isActionBlock))
+    showSlideBlocks(currentSlide)
+  }
+
   return {
     init: () => {
       slideshow.map(hideSlideBlocks)
@@ -39,15 +51,9 @@ export const createSlideControl = (slideshow: Slideshow): SlideControl => {
     },
     next: async () => {
       if (slideBlockIterator.hasNext()) {
-        applyAfterOption(slideBlockIterator.current().value)
-        await applyOption(slideBlockIterator.next().value)
+        await applyNextOption()
       } else if (slideIterator.hasNext()) {
-        hideSlideBlocks(currentSlide)
-        currentSlide = slideIterator.next().value
-        slideBlockIterator = makeCustomIterator(
-          currentSlide.filter(isActionBlock)
-        )
-        showSlideBlocks(currentSlide)
+        switchNextSlide()
       }
     },
     back: () => {
@@ -64,19 +70,11 @@ export const createSlideControl = (slideshow: Slideshow): SlideControl => {
         "enableAutoSlideshow"
       )
       if (!enableAutoSlideshow) return
-      while (slideIterator.hasNext()) {
+      while (slideIterator.hasNext() || slideBlockIterator.hasNext()) {
         if (slideBlockIterator.hasNext()) {
-          applyAfterOption(slideBlockIterator.current().value)
-          await applyOption(slideBlockIterator.next().value)
-        } else {
-          hideSlideBlocks(currentSlide)
-          currentSlide = slideIterator.next().value
-          slideBlockIterator = makeCustomIterator(
-            currentSlide.filter(isActionBlock)
-          )
-          await new Promise((s) => setTimeout(s, 500))
-          showSlideBlocks(currentSlide)
-          await playPageVideos(currentSlide)
+          await applyNextOption()
+        } else if (slideIterator.hasNext()) {
+          switchNextSlide()
         }
       }
     },

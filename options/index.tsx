@@ -35,10 +35,6 @@ const OptionsIndex = () => {
     "speakTextReplaceRules"
   )
 
-  const parseCsvToArray = async (csvText) => {
-    return csvText.split("\n").map((row) => row.split(","))
-  }
-
   return (
     <div>
       <h1>Notion Presentation Advanced Options</h1>

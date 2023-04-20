@@ -8,7 +8,6 @@ import {
 import { blockToSpeech } from "~contents/lib/textToSpeech"
 import { setElementStyle } from "~contents/lib/util"
 import { playPageVideos } from "~contents/lib/video"
-import { NotionBlock } from "~types/Block"
 import { getSlideStyles } from "~types/BlockOption"
 
 export const showSlideBlocks = (slide: Slide) => {
@@ -33,6 +32,7 @@ export const applyOption = async (block: SlideBlock) => {
     showBlock(block)
   }
   setElementStyle(block.target, "opacity", "1")
+  // block.target.scrollIntoView({ behavior: "smooth" }) // 挙動がおかしいので一旦コメントアウト
   block.target.offsetHeight // force reflow
   if (block.option.isReadAloud) {
     await readAloud(block)
@@ -50,9 +50,9 @@ const readAloud = async (block: SlideBlock) => {
   if (block.target.innerText) {
     await blockToSpeech(block.target.innerText)
   }
-  if (block.target.className.includes(NotionBlock.VideoBlock.className)) {
-    await playPageVideos(block)
-  }
+  // if (block.target.className.includes(NotionBlock.VideoBlock.className)) {
+  await playPageVideos(block)
+  // }
 }
 
 export type Slide = SlideBlock[]

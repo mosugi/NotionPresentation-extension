@@ -1,7 +1,7 @@
 {
   "name": "notion-presentation",
   "displayName": "__MSG_Name__",
-  "version": "4.3.0",
+  "version": "5.0.0",
   "description": "__MSG_Description__",
   "author": "mosugi",
   "scripts": {
