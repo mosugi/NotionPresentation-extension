@@ -1,12 +1,14 @@
-import { setStyle } from "~contents/lib/util"
+import { isNotionSite, setStyle } from "~contents/lib/util"
 
-export const coverSelector =
-  "#notion-app > div > div:nth-child(1) > div > div:nth-child(1) > div.notion-frame > div > div.whenContentEditable > div.pseudoSelection > div"
+export const coverSelector = isNotionSite()
+  ? "#notion-app > div > div:nth-child(1) > div > div:nth-child(1) > div.notion-frame > div > div.whenContentEditable > div.pseudoSelection > div"
+  : "#notion-app > div > div:nth-child(1) > div > div:nth-child(2) > div.notion-frame > div > div.whenContentEditable > div.pseudoSelection > div"
 const coverInnerSelector = `${coverSelector} > div:nth-child(1) > div`
 const coverInnerImageSelector = `${coverInnerSelector} > div > img`
 
-export const titleTagWrapperSelector =
-  "#notion-app > div > div:nth-child(1) > div > div:nth-child(1) > div.notion-frame > div > div.whenContentEditable > div:nth-child(3) > div"
+export const titleTagWrapperSelector = isNotionSite()
+  ? "#notion-app > div > div:nth-child(1) > div > div:nth-child(1) > div.notion-frame > div > div.whenContentEditable > div:nth-child(3) > div"
+  : "#notion-app > div > div:nth-child(1) > div > div:nth-child(2) > div.notion-frame > div > div.whenContentEditable > div:nth-child(3) > div"
 const titleSelector = `${titleTagWrapperSelector} > div:nth-child(1)`
 const tagSelector = `${titleTagWrapperSelector} > div:nth-child(2)`
 
@@ -38,18 +40,30 @@ export const hideControls = () => {
   setStyle(".notion-page-controls", "display", "none")
 }
 export const insertAnimationStyles = () => {
-  const slideInKeyFrames =
-    "<style>@keyframes slide-in { from { margin-left: 100%; width: 300%;}to {margin-left: 0%;width: 100%;}}</style>"
-  const fadeInKeyFrames =
-    "<style>@keyframes fade-in { from { opacity:0 }to {opacity:1;}}</style>"
+  const keyFrames = `
+    @keyframes slideIn {
+      from {
+        margin-left: 100%;
+        width: 300%;
+        }
+      to {
+        margin-left: 0%;
+        width: 100%;
+        }
+    }
+    @keyframes fadeIn {
+        from {
+            opacity:0
+        }
+        to {
+            opacity:1;
+        }
+    }
+`
+
   const notionSelectableStyle =
-    "<style>.notion-selectable {animation-duration: 0.5s;animation-name: fade-in;}</style>"
-  document
-    .querySelector("head")
-    .insertAdjacentHTML("beforeend", slideInKeyFrames)
-  document
-    .querySelector("head")
-    .insertAdjacentHTML("beforeend", fadeInKeyFrames)
+    "<style>.notion-selectable {animation-duration: 0.5s;animation-name: fadeIn;}</style>"
+  document.querySelector("head").insertAdjacentHTML("beforeend", keyFrames)
   document
     .querySelector("head")
     .insertAdjacentHTML("beforeend", notionSelectableStyle)

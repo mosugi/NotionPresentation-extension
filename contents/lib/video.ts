@@ -1,6 +1,4 @@
 import type { SlideBlock } from "~contents/lib/block"
-import type { Slide } from "~contents/lib/slide"
-import { NotionBlock } from "~types/Block"
 
 export const playPageVideos = async (block: SlideBlock) => {
   const videoBlocks = block?.target?.querySelectorAll("video")

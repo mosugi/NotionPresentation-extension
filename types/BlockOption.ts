@@ -15,7 +15,7 @@ export const SlideBlockStyle = {
     name: "Fade In",
     styles: [
       { prop: "animationDuration", value: "1s" },
-      { prop: "animationName", value: "fade-in" }
+      { prop: "animationName", value: "fadeIn" }
     ]
   },
   Slide: {
@@ -37,7 +37,7 @@ export const SlideBlockStyle = {
       { prop: "backdropFilter", value: "blur(8px)" },
       { prop: "backgroundColor", value: "rgba(255,255,255,0.5)" },
       { prop: "animationDuration", value: "1s" },
-      { prop: "animationName", value: "fade-in" }
+      { prop: "animationName", value: "fadeIn" }
     ]
   },
   Hide: {

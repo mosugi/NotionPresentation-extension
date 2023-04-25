@@ -1,3 +1,4 @@
+import { playPageAudios } from "~contents/lib/audio"
 import type { SlideBlock } from "~contents/lib/block"
 import {
   hideBlock,
@@ -50,9 +51,8 @@ const readAloud = async (block: SlideBlock) => {
   if (block.target.innerText) {
     await blockToSpeech(block.target.innerText)
   }
-  // if (block.target.className.includes(NotionBlock.VideoBlock.className)) {
   await playPageVideos(block)
-  // }
+  await playPageAudios(block)
 }
 
 export type Slide = SlideBlock[]

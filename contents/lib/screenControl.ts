@@ -8,10 +8,10 @@ export const toggleFullScreen = () => {
   )
   if (document.fullscreenElement) {
     exitFullScreen()
-    osc.innerText = "□"
+    osc ? (osc.innerText = "□") : null
   } else {
     requestFullScreen()
-    osc.innerText = "◻︎"
+    osc ? (osc.innerText = "◻︎") : null
   }
 }
 

@@ -14,3 +14,6 @@ export const isNotionSite = () => location.hostname.includes("notion.site")
 export const isNotionSo = () => location.hostname.includes("notion.so")
 export const objStartsWith = (obj, searchString) =>
   Object.entries(obj).filter((it) => it[0].startsWith(searchString))
+
+export const sleep = (timeout: number) =>
+  new Promise((resolve) => setTimeout(resolve, timeout))

@@ -11,7 +11,7 @@ import {
   showSlideBlocks
 } from "~contents/lib/slide"
 import type { Slideshow } from "~contents/lib/slideshow"
-import { playPageVideos } from "~contents/lib/video"
+import { sleep } from "~contents/lib/util"
 
 import { exitFullScreen } from "./fullScreen"
 
@@ -20,6 +20,7 @@ export type SlideControl = {
   next: () => void
   back: () => void
   auto: () => void
+  reRender: () => void
   exit: () => void
 }
 
@@ -64,12 +65,19 @@ export const createSlideControl = (slideshow: Slideshow): SlideControl => {
       )
       showSlideBlocks(currentSlide)
     },
+    reRender: async () => {
+      slideshow.map(showSlideBlocks)
+      await sleep(1000)
+      slideshow.map(hideSlideBlocks)
+      showSlideBlocks(currentSlide)
+    },
     auto: async () => {
       const storage = new Storage()
       const enableAutoSlideshow = await storage.get<boolean>(
         "enableAutoSlideshow"
       )
       if (!enableAutoSlideshow) return
+      await sleep(3000) // マウスカーソルを画面外に出すために3秒待つ
       while (slideIterator.hasNext() || slideBlockIterator.hasNext()) {
         if (slideBlockIterator.hasNext()) {
           await applyNextOption()

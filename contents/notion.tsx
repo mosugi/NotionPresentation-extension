@@ -6,6 +6,7 @@ import { Storage } from "@plasmohq/storage"
 import { fromStorageAll } from "~contents/lib/blockOption"
 import { requestFullScreen } from "~contents/lib/fullScreen"
 import { addKeyDownListener } from "~contents/lib/keyControl"
+import { addResizeListener } from "~contents/lib/resume"
 import { addOnScreenControl } from "~contents/lib/screenControl"
 import { createSlideControl } from "~contents/lib/slideControl"
 import { createSlides } from "~contents/lib/slideshow"
@@ -40,9 +41,11 @@ async function startPresentation() {
   const slideControl = createSlideControl(slideshow)
   if (enableOnScreenControl || isNotionSo()) addOnScreenControl(slideControl)
   if (enableKeyboard && isNotionSite()) addKeyDownListener(slideControl)
-  if (startInFullScreen) requestFullScreen()
 
   slideControl.init()
+
+  addResizeListener(slideControl)
+  if (startInFullScreen) requestFullScreen()
 }
 
 const notion = () => {
