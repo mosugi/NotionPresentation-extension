@@ -48,6 +48,7 @@ const azureSpeechSynthesisSSML = async (phraseText, config) => {
 
   let synthesizer = new sdk.SpeechSynthesizer(speechConfig, audioConfig)
 
+  // TODO スピード調整
   const ssmlText = `
 <speak version="1.0" xmlns="https://www.w3.org/2001/10/synthesis" xml:lang="${config.language}">
 <voice name="${config.voiceName}">
@@ -97,16 +98,14 @@ export const blockToSpeech = async (text) => {
   }
 }
 
-const normalize = (text: string) => {
-  return (text || "")
-    .replace(
-      /[^a-zA-Z0-9-\u4e00-\u9FFF\u3041-\u3096\u30A1-\u30FC\u3000-\u303F]/g,
+const removeEmojiFromString = (str) => {
+  return str.replace(
+      /(?:[\u{1F600}-\u{1F64F}]|[\u{1F300}-\u{1F5FF}]|[\u{1F680}-\u{1F6FF}]|[\u{1F1E0}-\u{1F1FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]|[\u{FE0F}]|[\u{1F900}-\u{1F9FF}]|[\u{1F018}-\u{1F270}]|[\u{1F650}-\u{1F6C5}]|[\u{1F30D}-\u{1F567}]|[\u{1F004}])\uFE0F?/gu,
       ""
-    )
-    .trim()
+  );
 }
 
 const applyReplaceRules = (text: string, rules: string[][]) => {
-  const normalized = normalize(text)
+  const normalized = removeEmojiFromString(text)
   return rules.reduce((acc, cur) => acc.replaceAll(cur[0], cur[1]), normalized)
 }

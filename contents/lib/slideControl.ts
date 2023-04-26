@@ -14,6 +14,7 @@ import type { Slideshow } from "~contents/lib/slideshow"
 import { sleep } from "~contents/lib/util"
 
 import { exitFullScreen } from "./fullScreen"
+import {blockToSpeech} from "~contents/lib/textToSpeech";
 
 export type SlideControl = {
   init: () => void
@@ -77,7 +78,12 @@ export const createSlideControl = (slideshow: Slideshow): SlideControl => {
         "enableAutoSlideshow"
       )
       if (!enableAutoSlideshow) return
-      await sleep(3000) // マウスカーソルを画面外に出すために3秒待つ
+      const enableReadAloud = await storage.get<boolean>(
+          "enableReadAloud"
+      )
+      if(enableReadAloud){
+        await blockToSpeech(slideIterator.current().value[1]?.target.innerText)
+      }
       while (slideIterator.hasNext() || slideBlockIterator.hasNext()) {
         if (slideBlockIterator.hasNext()) {
           await applyNextOption()

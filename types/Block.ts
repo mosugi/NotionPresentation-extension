@@ -73,7 +73,7 @@ export const NotionBlock = {
   },
   // SyncBlock notion-transclusion_container-block
   SyncBlock: {
-    displayName: "Sync",
+    displayName: "Sync (include inner blocks)",
     className: "notion-transclusion_container-block"
   },
   // Toggle heading 1 notion-header-block
@@ -81,11 +81,11 @@ export const NotionBlock = {
   // Toggle heading 3 notion-sub_sub_header-block
   // (2|3|4|5) columns notion-column_list-block
   ColumnBlock: {
-    displayName: "Column",
+    displayName: "Column (include inner blocks)",
     className: "notion-column-block"
   },
   ColumnListBlock: {
-    displayName: "Column List",
+    displayName: "Column List (include inner blocks)",
     className: "notion-column_list-block"
   },
   // Code - Mermaid notion-code-block
