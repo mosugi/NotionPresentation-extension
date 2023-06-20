@@ -40,7 +40,7 @@ export const hideControls = () => {
   setStyle(".notion-page-controls", "display", "none")
 }
 export const insertAnimationStyles = () => {
-  const keyFrames = `
+  const keyFrames = `<style>
     @keyframes slideIn {
       from {
         margin-left: 100%;
@@ -59,7 +59,7 @@ export const insertAnimationStyles = () => {
             opacity:1;
         }
     }
-`
+</style>`
 
   const notionSelectableStyle =
     "<style>.notion-selectable {animation-duration: 0.5s;animation-name: fadeIn;}</style>"
@@ -67,4 +67,20 @@ export const insertAnimationStyles = () => {
   document
     .querySelector("head")
     .insertAdjacentHTML("beforeend", notionSelectableStyle)
+}
+
+const removeAppleColorEmoji = (fontFamily) => fontFamily.replace('"Apple Color Emoji", ','')
+export const replaceAppleEmoji = () => {
+  Object.values(document.querySelectorAll('span[role="img"]')).map((it:HTMLElement) => it.style.fontFamily = removeAppleColorEmoji(it.style.fontFamily))
+}
+
+export const hideScrollBar = () => {
+  const style = `<style>
+  ::-webkit-scrollbar {
+    display: none;
+    }
+</style>`
+  document
+      .querySelector("head")
+      .insertAdjacentHTML("beforeend", style)
 }

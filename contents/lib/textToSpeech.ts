@@ -17,6 +17,7 @@ type AzureSpeechSynthesisConfig = {
   region: string
   voiceName: string
   language: string
+  rate: string
 }
 
 const getAzureSpeechSynthesisConfig =
@@ -27,11 +28,14 @@ const getAzureSpeechSynthesisConfig =
     const voiceName = await storage.get("azureTextToSpeechVoiceName")
     const language = await storage.get("azureTextToSpeechLanguage")
 
+    const rate = await storage.get("speechTextRate")
+
     return {
       subscriptionKey: subscriptionKey,
       region: region || "eastus",
       voiceName: voiceName || "ja-JP-DaichiNeural",
-      language: language || "ja-JP"
+      language: language || "ja-JP",
+      rate: rate || "0"
     }
   }
 
@@ -52,7 +56,7 @@ const azureSpeechSynthesisSSML = async (phraseText, config) => {
   const ssmlText = `
 <speak version="1.0" xmlns="https://www.w3.org/2001/10/synthesis" xml:lang="${config.language}">
 <voice name="${config.voiceName}">
-${phraseText}
+<prosody rate="${config.rate}%">${phraseText}</prosody>
 </voice>
 </speak>
 `

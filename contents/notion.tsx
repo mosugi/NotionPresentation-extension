@@ -11,8 +11,8 @@ import { addOnScreenControl } from "~contents/lib/screenControl"
 import { createSlideControl } from "~contents/lib/slideControl"
 import { createSlides } from "~contents/lib/slideshow"
 import {
-  hideControls,
-  insertAnimationStyles,
+  hideControls, hideScrollBar,
+  insertAnimationStyles, replaceAppleEmoji,
   styleFirstPage
 } from "~contents/lib/style"
 import { isNotionSite, isNotionSo } from "~contents/lib/util"
@@ -41,6 +41,10 @@ async function startPresentation() {
   const slideControl = createSlideControl(slideshow)
   if (enableOnScreenControl || isNotionSo()) addOnScreenControl(slideControl)
   if (enableKeyboard && isNotionSite()) addKeyDownListener(slideControl)
+
+  //FIXME この処理が重そう
+  if(true) replaceAppleEmoji()
+  hideScrollBar()
 
   slideControl.init()
 
