@@ -12,6 +12,7 @@ import {
 } from "~contents/lib/slide"
 import type { Slideshow } from "~contents/lib/slideshow"
 import { sleep } from "~contents/lib/util"
+import { resetToActualSize } from "~contents/lib/zoom"
 
 import { exitFullScreen } from "./fullScreen"
 
@@ -86,7 +87,8 @@ export const createSlideControl = (slideshow: Slideshow): SlideControl => {
         }
       }
     },
-    exit: () => {
+    exit: async () => {
+      await resetToActualSize()
       exitFullScreen()
       window.location.reload()
     }

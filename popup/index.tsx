@@ -26,7 +26,6 @@ const restoreBlockOption = async () => {
     .filter(isNotionBlockOption)
     .map(async ([key, _]) => await storage.remove(key))
   await Promise.all(removes)
-  debugger
   window.location.reload()
 }
 
@@ -37,6 +36,10 @@ const setZoom = async (zoomFactor: number) => {
 
 const IndexPopup = () => {
   const [zoom, setZoom] = useStorage("zoom", 1)
+  const [resetToActualSize, setResetToActualSize] = useStorage(
+    "setZoom.ts",
+    (v) => (v === undefined ? true : v)
+  )
   const [startInFullScreen, setStartInFullScreen] = useStorage(
     "startInFullScreen",
     (v) => (v === undefined ? true : v)
@@ -94,6 +97,14 @@ const IndexPopup = () => {
             <option value="2">200%</option>
           </select>
         </label>
+        <label>
+          <input
+            type={"checkbox"}
+            checked={resetToActualSize}
+            onChange={(e) => setResetToActualSize(e.target.checked)}
+          />
+          Reset size after presentation
+        </label>
       </p>
       <p>
         <label>
@@ -122,7 +133,7 @@ const IndexPopup = () => {
             checked={enableOnScreenControl}
             onChange={(e) => setEnableOnScreenControl(e.target.checked)}
           />
-          Enable on screen control <small>[←, →, F, Esc]</small>
+          Enable on screen control
         </label>
       </p>
       <p>
@@ -132,7 +143,7 @@ const IndexPopup = () => {
             checked={enableKeyboard}
             onChange={(e) => setEnableKeyboard(e.target.checked)}
           />
-          Enable Keyboard control <small>*notion.site only</small>
+          Enable Keyboard control <small>Alt + ← / → / F, Esc</small>
         </label>
       </p>
       <details>
