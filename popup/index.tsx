@@ -26,7 +26,6 @@ const restoreBlockOption = async () => {
     .filter(isNotionBlockOption)
     .map(async ([key, _]) => await storage.remove(key))
   await Promise.all(removes)
-  debugger
   window.location.reload()
 }
 
@@ -122,7 +121,7 @@ const IndexPopup = () => {
             checked={enableOnScreenControl}
             onChange={(e) => setEnableOnScreenControl(e.target.checked)}
           />
-          Enable on screen control <small>[←, →, F, Esc]</small>
+          Enable on screen control
         </label>
       </p>
       <p>
@@ -132,7 +131,7 @@ const IndexPopup = () => {
             checked={enableKeyboard}
             onChange={(e) => setEnableKeyboard(e.target.checked)}
           />
-          Enable Keyboard control <small>*notion.site only</small>
+          Enable Keyboard control <small>Alt + ← / → / F, Esc</small>
         </label>
       </p>
       <details>

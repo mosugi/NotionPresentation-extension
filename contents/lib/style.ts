@@ -1,19 +1,12 @@
 import { isNotionSite, setStyle } from "~contents/lib/util"
 
-export const coverSelector = isNotionSite()
-  ? "#notion-app > div > div:nth-child(1) > div > div:nth-child(1) > div.notion-frame > div > div.whenContentEditable > div.pseudoSelection > div"
-  : "#notion-app > div > div:nth-child(1) > div > div:nth-child(2) > div.notion-frame > div > div.whenContentEditable > div.pseudoSelection > div"
+export const coverSelector = "div.whenContentEditable > div.pseudoSelection > div"
 const coverInnerSelector = `${coverSelector} > div:nth-child(1) > div`
 const coverInnerImageSelector = `${coverInnerSelector} > div > img`
 
-export const titleTagWrapperSelector = isNotionSite()
-  ? "#notion-app > div > div:nth-child(1) > div > div:nth-child(1) > div.notion-frame > div > div.whenContentEditable > div:nth-child(3) > div"
-  : "#notion-app > div > div:nth-child(1) > div > div:nth-child(2) > div.notion-frame > div > div.whenContentEditable > div:nth-child(3) > div"
+export const titleTagWrapperSelector = "div.whenContentEditable > div:nth-child(3) > div"
 const titleSelector = `${titleTagWrapperSelector} > div:nth-child(1)`
 const tagSelector = `${titleTagWrapperSelector} > div:nth-child(2)`
-
-// title & tag
-// #notion-app > div > div:nth-child(1) > div > div:nth-child(1) > div.notion-frame > div > div.whenContentEditable > div:nth-child(3) > div
 
 export const styleFirstPage = (useCoverAsFirstSlide: boolean = true) => {
   const coverImage = document.querySelector(coverInnerImageSelector)

@@ -24,13 +24,14 @@ export const config: PlasmoCSConfig = {
 async function startPresentation() {
   const storage = await new Storage()
   const storageAll = await storage.getAll()
+  const useCoverAsFirstSlide = await storage.get<boolean>("useCoverAsFirstSlide")
   const slideshow = createSlides(
-    storageAll.useCoverAsFirstSlide,
+      useCoverAsFirstSlide,
     fromStorageAll(storageAll)
   )
 
   hideControls()
-  styleFirstPage(storageAll.useCoverAsFirstSlide)
+  styleFirstPage(useCoverAsFirstSlide)
 
   const startInFullScreen =
     (await storage.get<boolean>("startInFullScreen")) ?? true
@@ -40,7 +41,7 @@ async function startPresentation() {
 
   const slideControl = createSlideControl(slideshow)
   if (enableOnScreenControl || isNotionSo()) addOnScreenControl(slideControl)
-  if (enableKeyboard && isNotionSite()) addKeyDownListener(slideControl)
+  if (enableKeyboard) addKeyDownListener(slideControl)
 
   slideControl.init()
 
