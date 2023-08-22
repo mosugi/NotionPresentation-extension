@@ -36,6 +36,10 @@ const setZoom = async (zoomFactor: number) => {
 
 const IndexPopup = () => {
   const [zoom, setZoom] = useStorage("zoom", 1)
+  const [resetToActualSize, setResetToActualSize] = useStorage(
+    "setZoom.ts",
+    (v) => (v === undefined ? true : v)
+  )
   const [startInFullScreen, setStartInFullScreen] = useStorage(
     "startInFullScreen",
     (v) => (v === undefined ? true : v)
@@ -92,6 +96,14 @@ const IndexPopup = () => {
             <option value="1.75">175%</option>
             <option value="2">200%</option>
           </select>
+        </label>
+        <label>
+          <input
+            type={"checkbox"}
+            checked={resetToActualSize}
+            onChange={(e) => setResetToActualSize(e.target.checked)}
+          />
+          Reset size after presentation
         </label>
       </p>
       <p>

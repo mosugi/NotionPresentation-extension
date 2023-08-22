@@ -24,9 +24,11 @@ export const config: PlasmoCSConfig = {
 async function startPresentation() {
   const storage = await new Storage()
   const storageAll = await storage.getAll()
-  const useCoverAsFirstSlide = await storage.get<boolean>("useCoverAsFirstSlide")
+  const useCoverAsFirstSlide = await storage.get<boolean>(
+    "useCoverAsFirstSlide"
+  )
   const slideshow = createSlides(
-      useCoverAsFirstSlide,
+    useCoverAsFirstSlide,
     fromStorageAll(storageAll)
   )
 
