@@ -11,7 +11,7 @@ import {
   showSlideBlocks
 } from "~contents/lib/slide"
 import type { Slideshow } from "~contents/lib/slideshow"
-import { sleep } from "~contents/lib/util"
+import { firstFlat, lastFlat, sleep } from "~contents/lib/util"
 import { resetToActualSize } from "~contents/lib/zoom"
 
 import { exitFullScreen } from "./fullScreen"
@@ -43,13 +43,14 @@ export const createSlideControl = (slideshow: Slideshow): SlideControl => {
   }
 
   const preload = async () => {
-    slideshow.slice(-1)[0].slice(-1)[0].target.scrollIntoView({behavior: "smooth"})
+    lastFlat(slideshow).target.scrollIntoView({ behavior: "smooth" })
     await sleep(50 * slideshow.length)
+    firstFlat(slideshow).target.scrollIntoView()
   }
 
   return {
-    init: async  () => {
-      await preload();
+    init: async () => {
+      await preload()
       slideshow.map(hideSlideBlocks)
       currentSlide = slideIterator.next().value
       slideBlockIterator = makeCustomIterator(

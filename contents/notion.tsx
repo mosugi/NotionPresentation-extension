@@ -16,6 +16,7 @@ import {
   styleFirstPage
 } from "~contents/lib/style"
 import { isNotionSite, isNotionSo } from "~contents/lib/util"
+import { addBeforeUnloadListener, setZoomFromConfig } from "~contents/lib/zoom"
 
 export const config: PlasmoCSConfig = {
   matches: ["*://*.notion.so/*", "*://*.notion.site/*"]
@@ -47,8 +48,10 @@ async function startPresentation() {
 
   await slideControl.init()
 
+  addBeforeUnloadListener()
   addResizeListener(slideControl)
   if (startInFullScreen) requestFullScreen()
+  await setZoomFromConfig()
 }
 
 const notion = () => {

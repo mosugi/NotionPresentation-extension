@@ -17,3 +17,21 @@ export const objStartsWith = (obj, searchString) =>
 
 export const sleep = (timeout: number) =>
   new Promise((resolve) => setTimeout(resolve, timeout))
+
+export const last = <T>(arr: T[]): T => {
+  return arr[arr.length - 1]
+}
+
+export const first = <T>(arr: T[]): T => {
+  return arr[0]
+}
+
+export const lastFlat = (arr: any[]): any => {
+  const flattened = arr.flat()
+  return last(flattened)
+}
+
+export const firstFlat = (arr: any[]): any => {
+  const flattened = arr.flat()
+  return first(flattened)
+}

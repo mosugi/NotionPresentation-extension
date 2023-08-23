@@ -11,8 +11,7 @@ import { isNotionBlockOption } from "~contents/lib/blockOption"
 import BlockOptionItem, { Props } from "~popup/blockOptionItem"
 import { NotionBlock } from "~types/Block"
 
-const callInitPresentation = async (zoom) => {
-  await setZoom(zoom)
+const callInitPresentation = async () => {
   const csResponse = await sendToContentScript({
     name: "initPresentation"
   })
@@ -29,15 +28,10 @@ const restoreBlockOption = async () => {
   window.location.reload()
 }
 
-const setZoom = async (zoomFactor: number) => {
-  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
-  return await chrome.tabs.setZoom(tab.id, zoomFactor)
-}
-
 const IndexPopup = () => {
   const [zoom, setZoom] = useStorage("zoom", 1)
   const [resetToActualSize, setResetToActualSize] = useStorage(
-    "setZoom.ts",
+    "resetToActualSize",
     (v) => (v === undefined ? true : v)
   )
   const [startInFullScreen, setStartInFullScreen] = useStorage(
@@ -154,9 +148,7 @@ const IndexPopup = () => {
         <button onClick={restoreBlockOption}>Restore default options</button>
       </details>
 
-      <button onClick={() => callInitPresentation(zoom)}>
-        Start Slide Show
-      </button>
+      <button onClick={() => callInitPresentation()}>Start Slide Show</button>
     </div>
   )
 }
