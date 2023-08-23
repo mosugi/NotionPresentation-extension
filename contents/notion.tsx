@@ -15,7 +15,6 @@ import {
   insertAnimationStyles,
   styleFirstPage
 } from "~contents/lib/style"
-import { isNotionSite, isNotionSo } from "~contents/lib/util"
 import { addBeforeUnloadListener, setZoomFromConfig } from "~contents/lib/zoom"
 
 export const config: PlasmoCSConfig = {
@@ -43,7 +42,7 @@ async function startPresentation() {
   const enableKeyboard = (await storage.get<boolean>("enableKeyboard")) ?? true
 
   const slideControl = createSlideControl(slideshow)
-  if (enableOnScreenControl || isNotionSo()) addOnScreenControl(slideControl)
+  if (enableOnScreenControl) addOnScreenControl(slideControl)
   if (enableKeyboard) addKeyDownListener(slideControl)
 
   await slideControl.init()

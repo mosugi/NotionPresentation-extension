@@ -24,7 +24,10 @@ export const createSlides = (
   const initSlideShow: Slideshow = []
   if (useCoverAsFirstSlide) {
     const slide: Slide = []
-    slide.push({ target: document.querySelector(coverSelector) })
+    const cover = document.querySelector(coverSelector)
+    if (cover) {
+      slide.push({ target: document.querySelector(coverSelector) })
+    }
     slide.push({ target: document.querySelector(titleTagWrapperSelector) })
 
     initSlideShow.push(slide)
