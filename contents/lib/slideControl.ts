@@ -42,8 +42,14 @@ export const createSlideControl = (slideshow: Slideshow): SlideControl => {
     showSlideBlocks(currentSlide)
   }
 
+  const preload = async () => {
+    slideshow.slice(-1)[0].slice(-1)[0].target.scrollIntoView({behavior: "smooth"})
+    await sleep(50 * slideshow.length)
+  }
+
   return {
-    init: () => {
+    init: async  () => {
+      await preload();
       slideshow.map(hideSlideBlocks)
       currentSlide = slideIterator.next().value
       slideBlockIterator = makeCustomIterator(
@@ -78,7 +84,7 @@ export const createSlideControl = (slideshow: Slideshow): SlideControl => {
         "enableAutoSlideshow"
       )
       if (!enableAutoSlideshow) return
-      await sleep(3000) // マウスカーソルを画面外に出すために3秒待つ
+      await sleep(3000)
       while (slideIterator.hasNext() || slideBlockIterator.hasNext()) {
         if (slideBlockIterator.hasNext()) {
           await applyNextOption()

@@ -45,7 +45,7 @@ async function startPresentation() {
   if (enableOnScreenControl || isNotionSo()) addOnScreenControl(slideControl)
   if (enableKeyboard) addKeyDownListener(slideControl)
 
-  slideControl.init()
+  await slideControl.init()
 
   addResizeListener(slideControl)
   if (startInFullScreen) requestFullScreen()
