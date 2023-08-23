@@ -43,6 +43,7 @@ export const createSlideControl = (slideshow: Slideshow): SlideControl => {
   }
 
   const preload = async () => {
+    // slideごとにscrollIntoViewしてもいいかも
     lastFlat(slideshow).target?.scrollIntoView({ behavior: "smooth" })
     await sleep(50 * slideshow.length)
     firstFlat(slideshow).target?.scrollIntoView()

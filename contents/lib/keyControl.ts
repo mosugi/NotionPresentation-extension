@@ -8,8 +8,7 @@ export const addKeyDownListener = (slideControl: SlideControl) => {
     const useAltModifier = !isNotionSite() && event.altKey
 
     if (useAltModifier || isNotionSite()) {
-      // 操作が必要なキーイベントの場合、activeElementをblurする
-      ;(document.activeElement as HTMLElement).blur()
+      (document.activeElement as HTMLElement).blur()
 
       switch (event.key) {
         case "ArrowRight":
