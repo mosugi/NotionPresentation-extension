@@ -1,4 +1,10 @@
-export type BlockStyle = "Nothing" | "Fade In" | "Slide In" | "Caption" | "Hide"
+export type BlockStyle =
+  | "Nothing"
+  | "Scroll Into View"
+  | "Fade In"
+  | "Slide In"
+  | "Caption"
+  | "Hide"
 
 export type BlockOption = {
   style: BlockStyle
@@ -9,6 +15,10 @@ export type BlockOption = {
 export const SlideBlockStyle = {
   None: {
     name: "Nothing",
+    styles: []
+  },
+  Scroll: {
+    name: "Scroll Into View",
     styles: []
   },
   Fade: {

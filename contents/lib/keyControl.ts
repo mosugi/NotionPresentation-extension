@@ -8,7 +8,7 @@ export const addKeyDownListener = (slideControl: SlideControl) => {
     const useAltModifier = !isNotionSite() && event.altKey
 
     if (useAltModifier || isNotionSite()) {
-      (document.activeElement as HTMLElement).blur()
+      ;(document.activeElement as HTMLElement).blur()
 
       switch (event.key) {
         case "ArrowRight":

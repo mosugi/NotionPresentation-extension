@@ -2,14 +2,17 @@ import type { SlideBlock } from "~contents/lib/block"
 import { isSeparator } from "~contents/lib/block"
 import type { Slide } from "~contents/lib/slide"
 import { coverSelector, titleTagWrapperSelector } from "~contents/lib/style"
+import { last, lastFlat } from "~contents/lib/util"
 import type { BlockOption } from "~types/BlockOption"
-import {last, lastFlat} from "~contents/lib/util";
 
 export type Slideshow = Slide[]
 
 const blockSelector = ".notion-page-content .notion-selectable"
 
-const makeSlidesWithSeparator = (accumulator: Slideshow, currentValue: SlideBlock) => {
+const makeSlidesWithSeparator = (
+  accumulator: Slideshow,
+  currentValue: SlideBlock
+) => {
   // 最後のslideにseparatorがある場合は、新しいslideを作成しない
   if (isSeparator(currentValue) && !isSeparator(lastFlat(accumulator))) {
     accumulator.push([currentValue])

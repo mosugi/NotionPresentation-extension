@@ -11,7 +11,7 @@ import {
   showSlideBlocks
 } from "~contents/lib/slide"
 import type { Slideshow } from "~contents/lib/slideshow"
-import {first, firstFlat, last, lastFlat, sleep} from "~contents/lib/util"
+import { firstFlat, lastFlat, sleep } from "~contents/lib/util"
 import { resetToActualSize } from "~contents/lib/zoom"
 
 import { exitFullScreen } from "./fullScreen"

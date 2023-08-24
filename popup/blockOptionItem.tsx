@@ -37,20 +37,17 @@ const BlockOptionItem = (props: Props) => {
     <div>
       <strong>{props.block.displayName}</strong>
       <p>
-        <label>
-          BlockStyle:
-          <select
-            value={blockOption.style}
-            onChange={(e) =>
-              setBlockOption({
-                style: e.target.value as BlockStyle,
-                useAsSeparator: blockOption.useAsSeparator,
-                isReadAloud: blockOption.isReadAloud
-              })
-            }>
-            {blockStyleItems}
-          </select>
-        </label>
+        <select
+          value={blockOption.style}
+          onChange={(e) =>
+            setBlockOption({
+              style: e.target.value as BlockStyle,
+              useAsSeparator: blockOption.useAsSeparator,
+              isReadAloud: blockOption.isReadAloud
+            })
+          }>
+          {blockStyleItems}
+        </select>
         <label>
           <input
             checked={blockOption.useAsSeparator}
