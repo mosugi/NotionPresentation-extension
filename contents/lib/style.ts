@@ -35,17 +35,17 @@ export const hideControls = () => {
   setStyle(".notion-page-controls", "display", "none")
 }
 export const insertAnimationStyles = () => {
-  const keyFrames = `
-    @keyframes slideIn {
-      from {
-        margin-left: 100%;
-        width: 300%;
+  const keyFrames = document.createElement("style")
+  keyFrames.innerHTML = `
+    @keyframes slideInFromRight {
+        from {
+            transform: translateX(100%);
         }
-      to {
-        margin-left: 0%;
-        width: 100%;
+        to {
+            transform: translateX(0);
         }
     }
+    
     @keyframes fadeIn {
         from {
             opacity:0
@@ -55,11 +55,14 @@ export const insertAnimationStyles = () => {
         }
     }
 `
+  document.head.appendChild(keyFrames)
 
-  const notionSelectableStyle =
-    "<style>.notion-selectable {animation-duration: 0.5s;animation-name: fadeIn;}</style>"
-  document.querySelector("head").insertAdjacentHTML("beforeend", keyFrames)
-  document
-    .querySelector("head")
-    .insertAdjacentHTML("beforeend", notionSelectableStyle)
+  const notionSelectable = document.createElement("style")
+  notionSelectable.innerHTML = `
+    .notion-selectable {
+      animation-duration: 0.5s;
+      animation-name: fadeIn;
+    }
+`
+  document.head.appendChild(notionSelectable)
 }

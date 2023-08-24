@@ -32,7 +32,7 @@ export const SlideBlockStyle = {
     name: "Slide In",
     styles: [
       { prop: "animationDuration", value: "1s" },
-      { prop: "animationName", value: "slide-in" }
+      { prop: "animationName", value: "slideInFromRight" }
     ]
   },
   Caption: {

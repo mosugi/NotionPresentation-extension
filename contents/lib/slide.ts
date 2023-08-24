@@ -13,14 +13,14 @@ import { getSlideStyles } from "~types/BlockOption"
 
 export const showSlideBlocks = (slide: Slide) => {
   slide?.filter(isActionBlock).forEach((it) => {
-    it.target.style.animationName = "initial" // slideのanimationを解除
-    it.target.style.animationDuration = "initial" // slideのanimationを解除
+    it.target.style.animation = "none"
     if (
       it.option.style !== "Nothing" &&
       it.option.style !== "Scroll Into View" &&
       !it.option?.isReadAloud
     ) {
-      it.target.style.opacity = "0"
+      it.target.style.animationPlayState = "paused"
+      it.target.style.visibility = "hidden"
     }
   })
   slide?.filter(isNotHiddenBlock).map(showBlock)
@@ -32,7 +32,6 @@ export const hideSlideBlocks = (slide: Slide) => slide?.map(hideBlock)
 
 export const applyOption = async (block: SlideBlock) => {
   if (!block?.option) return
-  debugger
   getSlideStyles(block.option.style).map((it) =>
     setElementStyle(block.target, it.prop, it.value)
   )
@@ -42,9 +41,8 @@ export const applyOption = async (block: SlideBlock) => {
   if (block.option.style === "Scroll Into View") {
     block.target.scrollIntoView({ behavior: "smooth" })
   }
-  debugger
-  // FIXME ここでアニメーションを発火させるはずがうまくいかない
-  setElementStyle(block.target, "opacity", "1")
+  setElementStyle(block.target, "visibility", "visible")
+  setElementStyle(block.target, "animationPlayState", "running")
 
   block.target.offsetHeight // force reflow
   if (block.option.isReadAloud) {
