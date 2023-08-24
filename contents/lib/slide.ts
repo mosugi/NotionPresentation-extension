@@ -42,6 +42,7 @@ export const applyOption = async (block: SlideBlock) => {
     block.target.scrollIntoView({ behavior: "smooth" })
   }
   setElementStyle(block.target, "visibility", "visible")
+  setElementStyle(block.target, "animationDuration", "1s")
   setElementStyle(block.target, "animationPlayState", "running")
 
   block.target.offsetHeight // force reflow

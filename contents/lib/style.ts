@@ -1,4 +1,4 @@
-import { isNotionSite, setStyle } from "~contents/lib/util"
+import { setStyle } from "~contents/lib/util"
 
 export const coverSelector =
   "div.whenContentEditable > div.pseudoSelection > div"
@@ -35,28 +35,7 @@ export const hideControls = () => {
   setStyle(".notion-page-controls", "display", "none")
 }
 export const insertAnimationStyles = () => {
-  const keyFrames = document.createElement("style")
-  keyFrames.innerHTML = `
-    @keyframes slideInFromRight {
-        from {
-            transform: translateX(100%);
-        }
-        to {
-            transform: translateX(0);
-        }
-    }
-    
-    @keyframes fadeIn {
-        from {
-            opacity:0
-        }
-        to {
-            opacity:1;
-        }
-    }
-`
-  document.head.appendChild(keyFrames)
-
+  // FIXME 個別のブロックのデフォルト値にした方がいいかも
   const notionSelectable = document.createElement("style")
   notionSelectable.innerHTML = `
     .notion-selectable {

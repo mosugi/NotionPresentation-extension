@@ -17,11 +17,15 @@ import {
 } from "~contents/lib/style"
 import { addBeforeUnloadListener, setZoomFromConfig } from "~contents/lib/zoom"
 
+import "animate.css"
+
 export const config: PlasmoCSConfig = {
   matches: ["*://*.notion.so/*", "*://*.notion.site/*"]
 }
 
 async function startPresentation() {
+  insertAnimationStyles()
+
   const storage = await new Storage()
   const storageAll = await storage.getAll()
   const useCoverAsFirstSlide = await storage.get<boolean>(
@@ -65,8 +69,6 @@ const notion = () => {
     isPresentationStarted = true
     res.send(`${req.name} received.`)
   })
-
-  insertAnimationStyles()
 
   // TODO .notion-topbarからも起動できるようボタン追加する
   return <div></div>

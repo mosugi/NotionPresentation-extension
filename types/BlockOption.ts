@@ -14,26 +14,44 @@ export type BlockOption = {
 
 export const SlideBlockStyle = {
   None: {
-    name: "Nothing",
+    name: "No Effect",
     styles: []
   },
-  Scroll: {
-    name: "Scroll Into View",
-    styles: []
-  },
-  Fade: {
+  FadeIn: {
     name: "Fade In",
-    styles: [
-      { prop: "animationDuration", value: "1s" },
-      { prop: "animationName", value: "fadeIn" }
-    ]
+    styles: [{ prop: "animationName", value: "fadeIn" }]
   },
-  Slide: {
-    name: "Slide In",
-    styles: [
-      { prop: "animationDuration", value: "1s" },
-      { prop: "animationName", value: "slideInFromRight" }
-    ]
+  FadeInDown: {
+    name: "Fade In Down",
+    styles: [{ prop: "animationName", value: "fadeInUp" }]
+  },
+  FadeInLeft: {
+    name: "Fade In Left",
+    styles: [{ prop: "animationName", value: "fadeInLeft" }]
+  },
+  FadeInRight: {
+    name: "Fade In Right",
+    styles: [{ prop: "animationName", value: "fadeInRight" }]
+  },
+  FadeInUp: {
+    name: "Fade In Up",
+    styles: [{ prop: "animationName", value: "fadeInUp" }]
+  },
+  ZoomIn: {
+    name: "Zoom In",
+    styles: [{ prop: "animationName", value: "zoomIn" }]
+  },
+  Bounce: {
+    name: "Bounce",
+    styles: [{ prop: "animationName", value: "bounce" }]
+  },
+  Flash: {
+    name: "Flash",
+    styles: [{ prop: "animationName", value: "flash" }]
+  },
+  Pulse: {
+    name: "Pulse",
+    styles: [{ prop: "animationName", value: "pulse" }]
   },
   Caption: {
     name: "Caption",
@@ -49,6 +67,10 @@ export const SlideBlockStyle = {
       { prop: "animationDuration", value: "1s" },
       { prop: "animationName", value: "fadeIn" }
     ]
+  },
+  Scroll: {
+    name: "Scroll Into View",
+    styles: []
   },
   Hide: {
     name: "Hide",
