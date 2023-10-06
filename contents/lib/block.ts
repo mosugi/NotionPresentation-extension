@@ -7,7 +7,7 @@ export type SlideBlock = {
   option?: BlockOption
 }
 
-export const isSeparator = (block: SlideBlock) => block.option?.useAsSeparator
+export const isSeparator = (block: SlideBlock) => block?.option?.useAsSeparator
 
 export const isHiddenBlock = (block: SlideBlock) =>
   block.option?.style === SlideBlockStyle.Hide.name ||

@@ -5,7 +5,7 @@ import type { BlockOption, BlockStyle } from "~types/BlockOption"
 import { SlideBlockStyle } from "~types/BlockOption"
 
 const defaultBlockOption: BlockOption = {
-  style: "Nothing",
+  style: "No Effect",
   useAsSeparator: false,
   isReadAloud: false
 }

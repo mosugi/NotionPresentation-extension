@@ -15,7 +15,7 @@ export const showSlideBlocks = (slide: Slide) => {
   slide?.filter(isActionBlock).forEach((it) => {
     it.target.style.animation = "none"
     if (
-      it.option.style !== "Nothing" &&
+      it.option.style !== "No Effect" &&
       it.option.style !== "Scroll Into View" &&
       !it.option?.isReadAloud
     ) {

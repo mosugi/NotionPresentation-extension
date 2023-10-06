@@ -1,10 +1,5 @@
-export type BlockStyle =
-  | "Nothing"
-  | "Scroll Into View"
-  | "Fade In"
-  | "Slide In"
-  | "Caption"
-  | "Hide"
+// FIXME ENUMの二重定義
+export type BlockStyle = "No Effect" | "Scroll Into View" | "Caption" | "Hide"
 
 export type BlockOption = {
   style: BlockStyle

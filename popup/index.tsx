@@ -55,7 +55,7 @@ const IndexPopup = () => {
       blockOptions.push({
         block,
         option: {
-          style: "Nothing",
+          style: "No Effect",
           useAsSeparator: block.className === NotionBlock.HeaderBlock.className,
           isReadAloud: false
         }

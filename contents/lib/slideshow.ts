@@ -11,10 +11,14 @@ const blockSelector = ".notion-page-content .notion-selectable"
 
 const makeSlidesWithSeparator = (
   accumulator: Slideshow,
-  currentValue: SlideBlock
+  currentValue: SlideBlock,
+  currentIndex: number
 ) => {
-  // 最後のslideにseparatorがある場合は、新しいslideを作成しない
-  if (isSeparator(currentValue) && !isSeparator(lastFlat(accumulator))) {
+  // 最初のslideを作成する
+  if (currentIndex === 0) {
+    accumulator.push([currentValue])
+    // 最後のslideにseparatorがある場合は、新しいslideを作成しない
+  } else if (isSeparator(currentValue) && !isSeparator(lastFlat(accumulator))) {
     accumulator.push([currentValue])
   } else {
     last(accumulator).push(currentValue)
@@ -26,6 +30,11 @@ export const createSlides = (
   useCoverAsFirstSlide: boolean = true,
   blockOptions: Map<string, BlockOption>
 ) => {
+  const mapSlideBlock = (element): SlideBlock => ({
+    target: element as HTMLElement,
+    option: blockOptions.get(element.className)
+  })
+
   const initSlideShow: Slideshow = []
   if (useCoverAsFirstSlide) {
     const slide: Slide = []
@@ -39,11 +48,6 @@ export const createSlides = (
   }
 
   const notionPageBlocks = Array.from(document.querySelectorAll(blockSelector))
-
-  const mapSlideBlock = (element): SlideBlock => ({
-    target: element as HTMLElement,
-    option: blockOptions.get(element.className)
-  })
 
   return notionPageBlocks
     .map(mapSlideBlock)
