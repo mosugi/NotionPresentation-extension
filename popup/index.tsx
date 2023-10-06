@@ -12,12 +12,19 @@ import BlockOptionItem, { Props } from "~popup/blockOptionItem"
 import { NotionBlock } from "~types/Block"
 
 const callInitPresentation = async () => {
-  const csResponse = await sendToContentScript({
-    name: "initPresentation"
-  })
-  console.log(csResponse)
-  window.close()
+  try {
+    const csResponse = await sendToContentScript({
+      name: "initPresentation"
+    });
+    console.log(csResponse);
+  } catch (error) {
+    console.error("Error sending message to content script:", error);
+    alert("Please reload your Notion page.")
+  } finally {
+    window.close();
+  }
 }
+
 
 const restoreBlockOption = async () => {
   const storage = await new Storage()
