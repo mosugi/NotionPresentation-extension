@@ -5,6 +5,10 @@ export const setStyle = (selector, prop, value) => {
   const target = document.querySelector(selector)
   setElementStyle(target, prop, value)
 }
+export const setStyleAll = (selector, prop, value) => {
+  const targets = document.querySelectorAll(selector)
+  targets.forEach((target) => setElementStyle(target, prop, value))
+}
 export const setElementStyle = (target, prop, value) => {
   if (target) target.style[prop] = value
 }

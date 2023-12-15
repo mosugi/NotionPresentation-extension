@@ -1,33 +1,30 @@
 import { setStyle } from "~contents/lib/util"
 
 export const coverSelector =
-  "div.whenContentEditable > div.pseudoSelection > div"
-const coverInnerSelector = `${coverSelector} > div:nth-child(1) > div`
-const coverInnerImageSelector = `${coverInnerSelector} > div > img`
+  "div.layout-full"
 
-export const titleTagWrapperSelector =
-  "div.whenContentEditable > div:nth-child(3) > div"
-const titleSelector = `${titleTagWrapperSelector} > div:nth-child(1)`
-const tagSelector = `${titleTagWrapperSelector} > div:nth-child(2)`
+export const titleAndTagSelectorAll =
+  ".layout-content:not(.layout-editor)"
 
 export const styleFirstPage = (useCoverAsFirstSlide: boolean = true) => {
-  const coverImage = document.querySelector(coverInnerImageSelector)
-
-  if (coverImage) {
-    setStyle(coverSelector, "height", "80vh") // original 30vh
-    setStyle(coverInnerSelector, "height", "80vh") // original 30vh
-    setStyle(coverInnerImageSelector, "height", "80vh") // original 30vh
-    setStyle(titleSelector, "textAlign", "center") // original ''
-    setStyle(titleSelector, "width", "100%") // original 900px
-  } else {
-    setStyle(titleSelector, "position", "absolute") // original ''
-    setStyle(titleSelector, "top", "50%") // original ''
-  }
-  setStyle(tagSelector, "display", "none")
-  if (!useCoverAsFirstSlide) {
-    setStyle(coverSelector, "display", "none")
-    setStyle(titleTagWrapperSelector, "display", "none")
-  }
+  // FIXME 動かないのでコメントアウト
+  // const coverImage = document.querySelector(coverInnerImageSelector)
+  // setStyle(coverSelector, "height", "80vh") // original 30vh
+  // // if (coverImage) {
+  //   setStyle(coverSelector, "height", "80vh") // original 30vh
+  //   setStyle(coverInnerSelector, "height", "80vh") // original 30vh
+  //   setStyle(coverInnerImageSelector, "height", "80vh") // original 30vh
+  //   setStyle(titleSelector, "textAlign", "center") // original ''
+  //   setStyle(titleSelector, "width", "100%") // original 900px
+  // } else {
+  //   setStyle(titleSelector, "position", "absolute") // original ''
+  //   setStyle(titleSelector, "top", "50%") // original ''
+  // }
+  // setStyle(tagSelector, "display", "none")
+  // if (!useCoverAsFirstSlide) {
+  //   setStyle(coverSelector, "display", "none")
+  //   setStyle(titleTagWrapperSelector, "display", "none")
+  // }
 }
 export const hideControls = () => {
   setStyle(".notion-frame", "height", "100vh")
