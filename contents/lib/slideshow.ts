@@ -1,7 +1,7 @@
 import type { SlideBlock } from "~contents/lib/block"
 import { isSeparator } from "~contents/lib/block"
 import type { Slide } from "~contents/lib/slide"
-import { coverSelector, titleTagWrapperSelector } from "~contents/lib/style"
+import {coverSelector, titleAndTagSelectorAll} from "~contents/lib/style"
 import { last, lastFlat } from "~contents/lib/util"
 import type { BlockOption } from "~types/BlockOption"
 
@@ -42,7 +42,9 @@ export const createSlides = (
     if (cover) {
       slide.push({ target: document.querySelector(coverSelector) })
     }
-    slide.push({ target: document.querySelector(titleTagWrapperSelector) })
+    document.querySelectorAll(titleAndTagSelectorAll).forEach(element => {
+      slide.push({ target: element as HTMLElement });
+    });
 
     initSlideShow.push(slide)
   }
