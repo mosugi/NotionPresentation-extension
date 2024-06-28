@@ -17,8 +17,19 @@ export const hideNotionPageHeader = () => {
   setStyleAll(TITLE_PROPERTY_SELECTOR, "display", "none")
 }
 
+const adjustHeight = (element:HTMLElement) => {
+  if (element.style.height) {
+    element.style.height = '80vh';
+  }
+  Array.from(element.children).forEach(child => {
+    adjustHeight(child as HTMLElement);
+  });
+}
+
 export const styleNotionPageHeader = () => {
-  // setStyle(COVER_SELECTOR, "display", "none")
+  debugger
+  const pageCover = document.querySelector(COVER_SELECTOR);
+  adjustHeight(pageCover as HTMLElement);
   document.querySelectorAll(TITLE_PROPERTY_SELECTOR).forEach((element,i) => {
     // タイトル以外の要素
     // display:noneはスライド切り替えで使われるためvisibility:hiddenを利用
