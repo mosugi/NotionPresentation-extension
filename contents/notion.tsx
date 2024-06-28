@@ -11,8 +11,8 @@ import { addOnScreenControl } from "~contents/lib/screenControl"
 import { createSlideControl } from "~contents/lib/slideControl"
 import { createSlides, getPageCoverSlide } from "~contents/lib/slideshow"
 import {
-  hideNotionControls, hideNotionPageHandler,
-  insertAnimationStyles,
+  hideNotionControls, hideNotionPageHeader,
+  insertAnimationStyles, styleNotionPageHeader,
 } from "~contents/lib/style"
 import { addBeforeUnloadListener, setZoomFromConfig } from "~contents/lib/zoom"
 
@@ -41,7 +41,7 @@ async function startPresentation() {
       useCoverAsFirstSlide ? [getPageCoverSlide()] : []
   )
 
-  if(!useCoverAsFirstSlide) hideNotionPageHandler()
+  useCoverAsFirstSlide ? styleNotionPageHeader() : hideNotionPageHeader()
   hideNotionControls()
 
   const slideControl = createSlideControl(slideshow)
