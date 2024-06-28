@@ -1,36 +1,42 @@
-import { setStyle } from "~contents/lib/util"
+import {setElementStyle, setStyle, setStyleAll} from "~contents/lib/util"
 
-export const coverSelector =
-  "div.layout-full"
+export const COVER_SELECTOR = "div.layout-full" as const
 
-export const titleAndTagSelectorAll =
-  ".layout-content:not(.layout-editor)"
+export const TITLE_PROPERTY_SELECTOR =
+  ".layout-content:not(:has(.notion-page-content))" as const
 
-export const styleFirstPage = (useCoverAsFirstSlide: boolean = true) => {
-  // FIXME 動かないのでコメントアウト
-  // const coverImage = document.querySelector(coverInnerImageSelector)
-  // setStyle(coverSelector, "height", "80vh") // original 30vh
-  // // if (coverImage) {
-  //   setStyle(coverSelector, "height", "80vh") // original 30vh
-  //   setStyle(coverInnerSelector, "height", "80vh") // original 30vh
-  //   setStyle(coverInnerImageSelector, "height", "80vh") // original 30vh
-  //   setStyle(titleSelector, "textAlign", "center") // original ''
-  //   setStyle(titleSelector, "width", "100%") // original 900px
-  // } else {
-  //   setStyle(titleSelector, "position", "absolute") // original ''
-  //   setStyle(titleSelector, "top", "50%") // original ''
-  // }
-  // setStyle(tagSelector, "display", "none")
-  // if (!useCoverAsFirstSlide) {
-  //   setStyle(coverSelector, "display", "none")
-  //   setStyle(titleTagWrapperSelector, "display", "none")
-  // }
-}
-export const hideControls = () => {
+export const hideNotionControls = () => {
   setStyle(".notion-frame", "height", "100vh")
   setStyle(".notion-topbar", "display", "none")
   setStyle(".notion-page-controls", "display", "none")
+  setStyle(".layout-margin-right", "display", "none")
 }
+
+export const hideNotionPageHeader = () => {
+  setStyle(COVER_SELECTOR, "display", "none")
+  setStyleAll(TITLE_PROPERTY_SELECTOR, "display", "none")
+}
+
+const adjustHeight = (element:HTMLElement) => {
+  if (element.style.height) {
+    element.style.height = '80vh';
+  }
+  Array.from(element.children).forEach(child => {
+    adjustHeight(child as HTMLElement);
+  });
+}
+
+export const styleNotionPageHeader = () => {
+  debugger
+  const pageCover = document.querySelector(COVER_SELECTOR);
+  adjustHeight(pageCover as HTMLElement);
+  document.querySelectorAll(TITLE_PROPERTY_SELECTOR).forEach((element,i) => {
+    // タイトル以外の要素
+    // display:noneはスライド切り替えで使われるためvisibility:hiddenを利用
+    if(i > 0) setElementStyle(element, "visibility", "hidden")
+  });
+}
+
 export const insertAnimationStyles = () => {
   // FIXME 個別のブロックのデフォルト値にした方がいいかも
   const notionSelectable = document.createElement("style")

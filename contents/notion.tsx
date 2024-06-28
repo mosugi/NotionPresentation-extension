@@ -9,11 +9,10 @@ import { addKeyDownListener } from "~contents/lib/keyControl"
 import { addResizeListener } from "~contents/lib/resume"
 import { addOnScreenControl } from "~contents/lib/screenControl"
 import { createSlideControl } from "~contents/lib/slideControl"
-import { createSlides } from "~contents/lib/slideshow"
+import { createSlides, getPageCoverSlide } from "~contents/lib/slideshow"
 import {
-  hideControls,
-  insertAnimationStyles,
-  styleFirstPage
+  hideNotionControls, hideNotionPageHeader,
+  insertAnimationStyles, styleNotionPageHeader,
 } from "~contents/lib/style"
 import { addBeforeUnloadListener, setZoomFromConfig } from "~contents/lib/zoom"
 
@@ -31,19 +30,19 @@ async function startPresentation() {
   const useCoverAsFirstSlide = await storage.get<boolean>(
     "useCoverAsFirstSlide"
   )
-  const slideshow = createSlides(
-    useCoverAsFirstSlide,
-    fromStorageAll(storageAll)
-  )
-
-  hideControls()
-  styleFirstPage(useCoverAsFirstSlide)
-
   const startInFullScreen =
     (await storage.get<boolean>("startInFullScreen")) ?? true
   const enableOnScreenControl =
     (await storage.get<boolean>("enableOnScreenControl")) ?? true
   const enableKeyboard = (await storage.get<boolean>("enableKeyboard")) ?? true
+
+  const slideshow = createSlides(
+      fromStorageAll(storageAll),
+      useCoverAsFirstSlide ? [getPageCoverSlide()] : []
+  )
+
+  useCoverAsFirstSlide ? styleNotionPageHeader() : hideNotionPageHeader()
+  hideNotionControls()
 
   const slideControl = createSlideControl(slideshow)
   if (enableOnScreenControl) addOnScreenControl(slideControl)
