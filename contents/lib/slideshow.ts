@@ -1,13 +1,13 @@
 import type { SlideBlock } from "~contents/lib/block"
 import { isSeparator } from "~contents/lib/block"
 import type { Slide } from "~contents/lib/slide"
-import {coverSelector, titleAndTagSelectorAll} from "~contents/lib/style"
+import {COVER_SELECTOR, TITLE_PROPERTY_SELECTOR} from "~contents/lib/style"
 import { last, lastFlat } from "~contents/lib/util"
 import type { BlockOption } from "~types/BlockOption"
 
 export type Slideshow = Slide[]
 
-const blockSelector = ".notion-page-content .notion-selectable"
+const BLOCK_SELECTOR = ".notion-page-content .notion-selectable" as const
 
 const makeSlidesWithSeparator = (
   accumulator: Slideshow,
@@ -27,31 +27,29 @@ const makeSlidesWithSeparator = (
 }
 
 export const createSlides = (
-  useCoverAsFirstSlide: boolean = true,
-  blockOptions: Map<string, BlockOption>
-) => {
+  blockOptions: Map<string, BlockOption>,
+  initSlideShow: Slideshow = []
+): Slideshow => {
   const mapSlideBlock = (element): SlideBlock => ({
     target: element as HTMLElement,
     option: blockOptions.get(element.className)
   })
 
-  const initSlideShow: Slideshow = []
-  if (useCoverAsFirstSlide) {
-    const slide: Slide = []
-    const cover = document.querySelector(coverSelector)
-    if (cover) {
-      slide.push({ target: document.querySelector(coverSelector) })
-    }
-    document.querySelectorAll(titleAndTagSelectorAll).forEach(element => {
-      slide.push({ target: element as HTMLElement });
-    });
-
-    initSlideShow.push(slide)
-  }
-
-  const notionPageBlocks = Array.from(document.querySelectorAll(blockSelector))
+  const notionPageBlocks = Array.from(document.querySelectorAll(BLOCK_SELECTOR))
 
   return notionPageBlocks
     .map(mapSlideBlock)
     .reduce(makeSlidesWithSeparator, initSlideShow)
+}
+
+export const getPageCoverSlide = () => {
+    const slide: Slide = []
+    const cover = document.querySelector(COVER_SELECTOR)
+    if (cover) {
+      slide.push({ target: cover as HTMLElement})
+    }
+    document.querySelectorAll(TITLE_PROPERTY_SELECTOR).forEach(element => {
+      slide.push({ target: element as HTMLElement });
+    });
+    return slide
 }

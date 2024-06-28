@@ -52,6 +52,9 @@ export const createSlideControl = (slideshow: Slideshow): SlideControl => {
   return {
     init: async () => {
       await preload()
+      // FIXME slideshowにlayout-contentが含まれているのか全体がdisplay:noneになっている
+      // FIXME ヘッダー部がの仕様変更に弱い/非表示にする場合と処理をまとめたい
+      debugger
       slideshow.map(hideSlideBlocks)
       currentSlide = slideIterator.next().value
       slideBlockIterator = makeCustomIterator(
